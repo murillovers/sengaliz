@@ -9,38 +9,235 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UniformesRouteImport } from './routes/uniformes'
+import { Route as StylingRouteImport } from './routes/styling'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as MasculinoRouteImport } from './routes/masculino'
+import { Route as MarcasRouteImport } from './routes/marcas'
+import { Route as FestaRouteImport } from './routes/festa'
+import { Route as FemininoRouteImport } from './routes/feminino'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AlfaiatariaRouteImport } from './routes/alfaiataria'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
 
+const UniformesRoute = UniformesRouteImport.update({
+  id: '/uniformes',
+  path: '/uniformes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StylingRoute = StylingRouteImport.update({
+  id: '/styling',
+  path: '/styling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MasculinoRoute = MasculinoRouteImport.update({
+  id: '/masculino',
+  path: '/masculino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarcasRoute = MarcasRouteImport.update({
+  id: '/marcas',
+  path: '/marcas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FestaRoute = FestaRouteImport.update({
+  id: '/festa',
+  path: '/festa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FemininoRoute = FemininoRouteImport.update({
+  id: '/feminino',
+  path: '/feminino',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlfaiatariaRoute = AlfaiatariaRouteImport.update({
+  id: '/alfaiataria',
+  path: '/alfaiataria',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProdutoSlugRoute = ProdutoSlugRouteImport.update({
+  id: '/produto/$slug',
+  path: '/produto/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/alfaiataria': typeof AlfaiatariaRoute
+  '/contato': typeof ContatoRoute
+  '/feminino': typeof FemininoRoute
+  '/festa': typeof FestaRoute
+  '/marcas': typeof MarcasRoute
+  '/masculino': typeof MasculinoRoute
+  '/sobre': typeof SobreRoute
+  '/styling': typeof StylingRoute
+  '/uniformes': typeof UniformesRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/alfaiataria': typeof AlfaiatariaRoute
+  '/contato': typeof ContatoRoute
+  '/feminino': typeof FemininoRoute
+  '/festa': typeof FestaRoute
+  '/marcas': typeof MarcasRoute
+  '/masculino': typeof MasculinoRoute
+  '/sobre': typeof SobreRoute
+  '/styling': typeof StylingRoute
+  '/uniformes': typeof UniformesRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/alfaiataria': typeof AlfaiatariaRoute
+  '/contato': typeof ContatoRoute
+  '/feminino': typeof FemininoRoute
+  '/festa': typeof FestaRoute
+  '/marcas': typeof MarcasRoute
+  '/masculino': typeof MasculinoRoute
+  '/sobre': typeof SobreRoute
+  '/styling': typeof StylingRoute
+  '/uniformes': typeof UniformesRoute
+  '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/alfaiataria'
+    | '/contato'
+    | '/feminino'
+    | '/festa'
+    | '/marcas'
+    | '/masculino'
+    | '/sobre'
+    | '/styling'
+    | '/uniformes'
+    | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/alfaiataria'
+    | '/contato'
+    | '/feminino'
+    | '/festa'
+    | '/marcas'
+    | '/masculino'
+    | '/sobre'
+    | '/styling'
+    | '/uniformes'
+    | '/produto/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/alfaiataria'
+    | '/contato'
+    | '/feminino'
+    | '/festa'
+    | '/marcas'
+    | '/masculino'
+    | '/sobre'
+    | '/styling'
+    | '/uniformes'
+    | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AlfaiatariaRoute: typeof AlfaiatariaRoute
+  ContatoRoute: typeof ContatoRoute
+  FemininoRoute: typeof FemininoRoute
+  FestaRoute: typeof FestaRoute
+  MarcasRoute: typeof MarcasRoute
+  MasculinoRoute: typeof MasculinoRoute
+  SobreRoute: typeof SobreRoute
+  StylingRoute: typeof StylingRoute
+  UniformesRoute: typeof UniformesRoute
+  ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/uniformes': {
+      id: '/uniformes'
+      path: '/uniformes'
+      fullPath: '/uniformes'
+      preLoaderRoute: typeof UniformesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/styling': {
+      id: '/styling'
+      path: '/styling'
+      fullPath: '/styling'
+      preLoaderRoute: typeof StylingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/masculino': {
+      id: '/masculino'
+      path: '/masculino'
+      fullPath: '/masculino'
+      preLoaderRoute: typeof MasculinoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marcas': {
+      id: '/marcas'
+      path: '/marcas'
+      fullPath: '/marcas'
+      preLoaderRoute: typeof MarcasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/festa': {
+      id: '/festa'
+      path: '/festa'
+      fullPath: '/festa'
+      preLoaderRoute: typeof FestaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feminino': {
+      id: '/feminino'
+      path: '/feminino'
+      fullPath: '/feminino'
+      preLoaderRoute: typeof FemininoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alfaiataria': {
+      id: '/alfaiataria'
+      path: '/alfaiataria'
+      fullPath: '/alfaiataria'
+      preLoaderRoute: typeof AlfaiatariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +245,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/produto/$slug': {
+      id: '/produto/$slug'
+      path: '/produto/$slug'
+      fullPath: '/produto/$slug'
+      preLoaderRoute: typeof ProdutoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AlfaiatariaRoute: AlfaiatariaRoute,
+  ContatoRoute: ContatoRoute,
+  FemininoRoute: FemininoRoute,
+  FestaRoute: FestaRoute,
+  MarcasRoute: MarcasRoute,
+  MasculinoRoute: MasculinoRoute,
+  SobreRoute: SobreRoute,
+  StylingRoute: StylingRoute,
+  UniformesRoute: UniformesRoute,
+  ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
