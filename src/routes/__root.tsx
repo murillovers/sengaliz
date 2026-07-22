@@ -83,10 +83,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Sengaliz" },
       { name: "twitter:card", content: "summary_large_image" },
+      { title: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
+      { property: "og:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
+      { name: "twitter:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
+      { name: "description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { property: "og:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { name: "twitter:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6a1c3365-37d9-419d-9495-11590c45b70e" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6a1c3365-37d9-419d-9495-11590c45b70e" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: favicon.url },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

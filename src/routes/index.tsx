@@ -13,11 +13,11 @@ export const Route = createFileRoute("/")({
         content:
           "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
       },
-      { property: "og:title", content: "Sengaliz — Moda de festa e alfaiataria unissex" },
+      { property: "og:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
       {
         property: "og:description",
         content:
-          "Curadoria de peças elegantes para casamentos, formaturas e eventos. Atendimento consultivo em Caxias do Sul e envio para todo o Brasil.",
+          "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
       },
     ],
   }),
