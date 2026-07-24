@@ -49,8 +49,8 @@ export function SiteFooter() {
           <div>
             <h4 className="eyebrow text-[color:var(--gold)]">Atendimento</h4>
             <ul className="mt-5 space-y-3 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> R. Sinimbu, 000 — Centro, Caxias do Sul/RS</li>
-              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> (54) 99999-0000</li>
+              <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> R. Reinaldo Gazola, 348 - Sl Aérea C - Sanvitto, Caxias do Sul - RS, 95099-250</li>
+              <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> (54) 93380-3839</li>
               <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> ola@sengaliz.com.br</li>
             </ul>
           </div>
