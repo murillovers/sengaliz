@@ -106,7 +106,7 @@ function UniformesPage() {
                 <Field label="Tipo de uniforme" name="tipo" required placeholder="Ex.: Camisa social + colete" />
                 <Field label="Telefone / WhatsApp" name="telefone" required />
                 <Field label="E-mail" name="email" type="email" required />
-                <button className="mt-4 w-full bg-[color:var(--gold)] px-6 py-4 text-xs uppercase tracking-[0.28em] text-black transition-opacity hover:opacity-90">
+                <button className="mt-4 min-h-11 w-full border border-gold bg-gold-gradient px-6 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite transition-all hover:brightness-105">
                   Enviar solicitação
                 </button>
                 <p className="text-center text-[11px] text-white/50">

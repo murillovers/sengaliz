@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Heart, ShieldCheck, Truck, Ruler } from "lucide-react";
-import { products, formatPrice } from "@/lib/products";
+import { products, formatPrice, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
 
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/produto/$slug")({
           ],
     };
   },
-  loader: ({ params }) => {
+  loader: ({ params }): Product => {
     const p = products.find((x) => x.slug === params.slug);
     if (!p) throw notFound();
     return p;
@@ -47,7 +47,6 @@ export const Route = createFileRoute("/produto/$slug")({
 
 function ProductPage() {
   const product = Route.useLoaderData();
-  if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
   return (

@@ -36,14 +36,15 @@ export function SiteHeader() {
           <Menu className="h-5 w-5" />
         </Button>
 
-        <button
+        <Button
           type="button"
+          variant="ghost"
           onClick={() => setSearchOpen((value) => !value)}
           className="hidden min-h-11 max-w-xs items-center gap-3 border-b border-border text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-gold hover:text-foreground lg:flex"
           aria-expanded={searchOpen}
         >
           <Search className="h-4 w-4" /> Produtos, alfaiates ou ateliês
-        </button>
+        </Button>
 
         <Link to="/" className="flex justify-center">
           <img src={logo.url} alt="Sengaliz — Estúdio de costura" className="h-12 w-auto max-w-[220px] object-contain md:h-14 md:max-w-[300px]" />
