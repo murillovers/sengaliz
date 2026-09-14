@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Heart, ShieldCheck, Truck, Ruler } from "lucide-react";
-import { products, formatPrice } from "@/lib/products";
+import { products, formatPrice, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/produto/$slug")({
   head: ({ params }) => {
@@ -13,13 +14,22 @@ export const Route = createFileRoute("/produto/$slug")({
             { name: "description", content: `${p.name} por ${p.brand}. ${formatPrice(p.price)}. Curadoria Sengaliz.` },
             { property: "og:title", content: `${p.name} — Sengaliz` },
             { property: "og:description", content: `${p.brand} • ${p.occasion}` },
+            { property: "og:type", content: "website" },
+            { name: "twitter:card", content: "summary_large_image" },
             { property: "og:image", content: p.image },
             { name: "twitter:image", content: p.image },
           ]
-        : [{ title: "Produto — Sengaliz" }],
+        : [
+            { title: "Produto — Sengaliz" },
+            { name: "description", content: "Conheça a curadoria de moda e alfaiataria da Sengaliz." },
+            { property: "og:title", content: "Produto — Sengaliz" },
+            { property: "og:description", content: "Conheça a curadoria de moda e alfaiataria da Sengaliz." },
+            { property: "og:type", content: "website" },
+            { name: "twitter:card", content: "summary_large_image" },
+          ],
     };
   },
-  loader: ({ params }) => {
+  loader: ({ params }): Product => {
     const p = products.find((x) => x.slug === params.slug);
     if (!p) throw notFound();
     return p;
@@ -36,7 +46,8 @@ export const Route = createFileRoute("/produto/$slug")({
 });
 
 function ProductPage() {
-  const product = Route.useLoaderData();
+  const product: Product | undefined = Route.useLoaderData();
+  if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
   return (
@@ -59,9 +70,9 @@ function ProductPage() {
             <p className="eyebrow">Tamanho</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["PP", "P", "M", "G", "GG"].map((s) => (
-                <button key={s} className="h-11 w-11 border border-border text-sm transition-colors hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]">
+                <Button key={s} variant="outline" size="icon" aria-label={`Selecionar tamanho ${s}`}>
                   {s}
-                </button>
+                </Button>
               ))}
             </div>
             <button className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
@@ -70,12 +81,12 @@ function ProductPage() {
           </div>
 
           <div className="mt-8 flex gap-3">
-            <button className="flex-1 bg-black px-8 py-4 text-xs uppercase tracking-[0.28em] text-white transition-opacity hover:opacity-90">
+            <Button className="flex-1" size="lg">
               Adicionar à sacola
-            </button>
-            <button aria-label="Favoritar" className="flex h-14 w-14 items-center justify-center border border-border transition-colors hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]">
+            </Button>
+            <Button aria-label="Favoritar" variant="outline" size="icon" className="h-12 w-12">
               <Heart className="h-5 w-5" />
-            </button>
+            </Button>
           </div>
 
           <div className="mt-6 border border-[color:var(--gold)]/40 bg-[color:var(--gold)]/5 p-4 text-xs">

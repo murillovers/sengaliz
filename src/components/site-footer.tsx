@@ -1,15 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MapPin, Mail, Phone } from "lucide-react";
-import logo from "@/assets/sengaliz-logo.png.asset.json";
+import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 import { Butterfly } from "./butterfly";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 bg-black text-white/70">
+    <footer className="mt-24 bg-graphite text-primary-foreground/70">
       <div className="container-page py-16">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
-            <img src={logo.url} alt="Sengaliz" className="h-14 w-auto" />
+            <img src={emblem.url} alt="Emblema Sengaliz" className="h-20 w-20 border border-gold/30 object-cover" />
             <p className="mt-6 text-sm leading-relaxed">
               Curadoria de moda unissex para festa, alfaiataria e uniformes corporativos.
               Caxias do Sul — RS.
@@ -42,7 +42,7 @@ export function SiteFooter() {
               <li><Link to="/styling" className="hover:text-white">Styling & Atendimento</Link></li>
               <li><Link to="/uniformes" className="hover:text-white">Uniformes corporativos</Link></li>
               <li><Link to="/contato" className="hover:text-white">Loja física & contato</Link></li>
-              <li><Link to="/politicas" className="hover:text-white">Trocas & FAQ</Link></li>
+              <li><Link to="/contato" className="hover:text-primary-foreground">Trocas & FAQ</Link></li>
             </ul>
           </div>
 
@@ -60,8 +60,8 @@ export function SiteFooter() {
           <Butterfly className="h-6 w-6 text-[color:var(--gold)]/70" />
         </div>
 
-        <div className="mt-8 flex flex-col items-center gap-4 border-t border-white/10 pt-8 text-xs text-white/50 md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} Sengaliz. Todos os direitos reservados.</p>
+        <div className="mt-8 flex flex-col items-center gap-4 border-t border-primary-foreground/10 pt-8 text-xs text-primary-foreground/50 md:flex-row md:justify-between">
+          <p>© {new Date().getFullYear()} Sengaliz Alfaiataria & Marketplace. Todos os direitos reservados.</p>
           <div className="flex items-center gap-3">
             <span>Pagamento seguro</span>
             <span className="rounded border border-white/20 px-2 py-1">Pix</span>

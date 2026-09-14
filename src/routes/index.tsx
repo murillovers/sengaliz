@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MapPin, Truck, ShieldCheck, Calendar } from "luci
 import { products, brands } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { ButterflyDivider, Butterfly } from "@/components/butterfly";
+import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/")({
         content:
           "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,
@@ -51,7 +54,7 @@ function Home() {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 to="/festa"
-                className="inline-flex items-center gap-3 bg-[color:var(--gold)] px-8 py-4 text-xs uppercase tracking-[0.28em] text-black transition-opacity hover:opacity-90"
+                className="inline-flex min-h-11 items-center gap-3 border border-gold bg-gold-gradient px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite shadow-card transition-all hover:brightness-105"
               >
                 Ver coleção <ArrowRight className="h-4 w-4" />
               </Link>
@@ -143,7 +146,8 @@ function Home() {
       {/* BRANDS */}
       <section className="border-y border-border bg-[color:var(--muted)] py-16">
         <div className="container-page">
-          <p className="eyebrow text-center text-[color:var(--gold)]">Marcas parceiras</p>
+          <img src={emblem.url} alt="Emblema oficial Sengaliz" className="mx-auto mb-6 h-20 w-20 border border-gold/30 object-cover" loading="lazy" />
+          <p className="eyebrow text-center text-[color:var(--gold)]">Ateliês e marcas parceiras verificadas</p>
           <div className="mt-10 grid grid-cols-2 items-center gap-8 md:grid-cols-6">
             {brands.map((b) => (
               <div key={b} className="text-center font-serif text-lg text-foreground/60 transition-colors hover:text-foreground">
@@ -227,7 +231,7 @@ function Home() {
               placeholder="Seu e-mail"
               className="flex-1 border border-border bg-background px-5 py-4 text-sm outline-none focus:border-[color:var(--gold)]"
             />
-            <button className="bg-[color:var(--gold)] px-8 py-4 text-xs uppercase tracking-[0.28em] text-black transition-opacity hover:opacity-90">
+            <button className="min-h-11 border border-primary bg-primary px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground">
               Assinar
             </button>
           </form>

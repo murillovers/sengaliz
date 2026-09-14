@@ -17,6 +17,8 @@ export const Route = createFileRoute("/uniformes")({
         content:
           "Uniformes com identidade da sua empresa, feitos com qualidade de alfaiataria. Solicite orçamento.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: UniformesPage,
@@ -104,11 +106,11 @@ function UniformesPage() {
                 <Field label="Tipo de uniforme" name="tipo" required placeholder="Ex.: Camisa social + colete" />
                 <Field label="Telefone / WhatsApp" name="telefone" required />
                 <Field label="E-mail" name="email" type="email" required />
-                <button className="mt-4 w-full bg-[color:var(--gold)] px-6 py-4 text-xs uppercase tracking-[0.28em] text-black transition-opacity hover:opacity-90">
+                <button className="mt-4 min-h-11 w-full border border-gold bg-gold-gradient px-6 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite transition-all hover:brightness-105">
                   Enviar solicitação
                 </button>
                 <p className="text-center text-[11px] text-white/50">
-                  Ou fale direto no <a href="https://wa.me/5554999990000" className="underline hover:text-[color:var(--gold)]">WhatsApp comercial</a>.
+                  Ou fale direto no <a href="https://wa.me/5554933803839" className="underline hover:text-[color:var(--gold)]">WhatsApp comercial</a>.
                 </p>
               </div>
             )}

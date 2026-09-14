@@ -16,6 +16,8 @@ export const Route = createFileRoute("/marcas")({
         property: "og:description",
         content: "Curadoria de marcas para festa, alfaiataria e ocasiões especiais.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: MarcasPage,
