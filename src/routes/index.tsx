@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MapPin, Truck, ShieldCheck, Calendar } from "luci
 import { products, brands } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { ButterflyDivider, Butterfly } from "@/components/butterfly";
+import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -145,7 +146,8 @@ function Home() {
       {/* BRANDS */}
       <section className="border-y border-border bg-[color:var(--muted)] py-16">
         <div className="container-page">
-          <p className="eyebrow text-center text-[color:var(--gold)]">Marcas parceiras</p>
+          <img src={emblem.url} alt="Emblema oficial Sengaliz" className="mx-auto mb-6 h-20 w-20 border border-gold/30 object-cover" loading="lazy" />
+          <p className="eyebrow text-center text-[color:var(--gold)]">Ateliês e marcas parceiras verificadas</p>
           <div className="mt-10 grid grid-cols-2 items-center gap-8 md:grid-cols-6">
             {brands.map((b) => (
               <div key={b} className="text-center font-serif text-lg text-foreground/60 transition-colors hover:text-foreground">
