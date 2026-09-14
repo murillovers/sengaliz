@@ -46,7 +46,7 @@ export const Route = createFileRoute("/produto/$slug")({
 });
 
 function ProductPage() {
-  const product = Route.useLoaderData();
+  const product: Product | undefined = Route.useLoaderData();
   if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
