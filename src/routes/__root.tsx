@@ -14,7 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
-import favicon from "@/assets/favicon.png.asset.json";
+import { Button } from "@/components/ui/button";
 
 function NotFoundComponent() {
   return (
@@ -26,12 +26,7 @@ function NotFoundComponent() {
           A página que você procura não existe ou foi movida.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center border border-[color:var(--gold)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-[color:var(--gold)] transition-colors hover:bg-[color:var(--gold)] hover:text-black"
-          >
-            Voltar ao início
-          </Link>
+          <Button asChild variant="outline"><Link to="/">Voltar ao início</Link></Button>
         </div>
       </div>
     </div>
@@ -53,15 +48,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           Tente novamente ou volte para o início.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <button
+          <Button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center bg-[color:var(--gold)] px-6 py-3 text-xs uppercase tracking-[0.24em] text-black transition-opacity hover:opacity-90"
           >
             Tentar novamente
-          </button>
+          </Button>
           <a
             href="/"
             className="inline-flex items-center justify-center border border-border px-6 py-3 text-xs uppercase tracking-[0.24em]"
@@ -89,16 +83,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
       { property: "og:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
       { name: "twitter:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6a1c3365-37d9-419d-9495-11590c45b70e" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/6a1c3365-37d9-419d-9495-11590c45b70e" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap",
       },
     ],
   }),

@@ -30,35 +30,47 @@
   --color-ring: var(--ring);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold-light: var(--gold-light);
+  --color-graphite: var(--graphite);
+  --color-surface: var(--surface);
   --color-ink: var(--ink);
-  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cinzel", "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.25rem;
-  --background: oklch(0.985 0.005 90);
-  --foreground: oklch(0.15 0.01 60);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 60);
-  --primary: oklch(0.15 0.01 60);
-  --primary-foreground: oklch(0.985 0.005 90);
-  --secondary: oklch(0.96 0.01 80);
-  --secondary-foreground: oklch(0.15 0.01 60);
-  --muted: oklch(0.95 0.01 80);
-  --muted-foreground: oklch(0.45 0.02 60);
-  --accent: oklch(0.76 0.13 82);
-  --accent-foreground: oklch(0.15 0.01 60);
+  --background: oklch(0.982 0.007 84);
+  --foreground: oklch(0.178 0 0);
+  --card: oklch(0.964 0.006 84);
+  --card-foreground: oklch(0.178 0 0);
+  --popover: oklch(0.982 0.007 84);
+  --popover-foreground: oklch(0.178 0 0);
+  --primary: oklch(0.178 0 0);
+  --primary-foreground: oklch(0.982 0.007 84);
+  --secondary: oklch(0.964 0.006 84);
+  --secondary-foreground: oklch(0.178 0 0);
+  --muted: oklch(0.964 0.006 84);
+  --muted-foreground: oklch(0.446 0 0);
+  --accent: oklch(0.702 0.105 78.5);
+  --accent-foreground: oklch(0.178 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0.005 90);
-  --border: oklch(0.9 0.01 80);
-  --input: oklch(0.9 0.01 80);
-  --ring: oklch(0.76 0.13 82);
-  --gold: oklch(0.76 0.13 82);
-  --gold-soft: oklch(0.88 0.08 85);
-  --ink: oklch(0.12 0.01 60);
+  --border: oklch(0.876 0.005 84);
+  --input: oklch(0.876 0.005 84);
+  --ring: oklch(0.702 0.105 78.5);
+  --gold: oklch(0.702 0.105 78.5);
+  --gold-soft: oklch(0.9 0.057 86);
+  --gold-deep: oklch(0.511 0.098 82);
+  --gold-light: oklch(0.89 0.126 91);
+  --graphite: oklch(0.178 0 0);
+  --surface: oklch(0.964 0.006 84);
+  --ink: oklch(0.178 0 0);
+  --gradient-gold: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 50%, var(--gold-light) 100%);
+  --gradient-gold-subtle: linear-gradient(180deg, color-mix(in oklab, var(--gold) 15%, transparent) 0%, color-mix(in oklab, var(--gold) 2%, transparent) 100%);
+  --shadow-card: 0 4px 16px color-mix(in oklab, var(--graphite) 4%, transparent);
+  --shadow-modal: 0 16px 40px color-mix(in oklab, var(--graphite) 12%, transparent);
 }
 
 .dark {
@@ -90,15 +102,20 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-size: 13px;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, .font-serif {
+  h1, h2, .font-serif {
     font-family: var(--font-serif);
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
+
+  h3, h4 { font-family: var(--font-sans); font-weight: 600; letter-spacing: 0; }
+
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
 }
 
 @utility container-page {
@@ -114,7 +131,12 @@
 @utility eyebrow {
   font-family: var(--font-sans);
   font-size: 0.7rem;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 500;
 }
+
+@utility bg-gold-gradient { background-image: var(--gradient-gold); }
+@utility bg-gold-subtle { background-image: var(--gradient-gold-subtle); }
+@utility shadow-card { box-shadow: var(--shadow-card); }
+@utility shadow-modal { box-shadow: var(--shadow-modal); }
