@@ -16,6 +16,8 @@ export const Route = createFileRoute("/styling")({
         property: "og:description",
         content: "Prova de roupa com consultoria dedicada para o seu evento.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: StylingPage,
@@ -35,7 +37,7 @@ function StylingPage() {
               Presencial em Caxias do Sul ou por videochamada para quem está longe.
             </p>
             <a
-              href="https://wa.me/5554999990000?text=Ol%C3%A1%2C%20quero%20agendar%20um%20styling"
+              href="https://wa.me/5554933803839?text=Ol%C3%A1%2C%20quero%20agendar%20um%20styling"
               className="mt-10 inline-flex items-center gap-3 bg-[color:var(--gold)] px-8 py-4 text-xs uppercase tracking-[0.28em] text-black transition-opacity hover:opacity-90"
             >
               <Calendar className="h-4 w-4" /> Reservar horário

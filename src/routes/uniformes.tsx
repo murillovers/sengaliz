@@ -17,6 +17,8 @@ export const Route = createFileRoute("/uniformes")({
         content:
           "Uniformes com identidade da sua empresa, feitos com qualidade de alfaiataria. Solicite orçamento.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: UniformesPage,
@@ -108,7 +110,7 @@ function UniformesPage() {
                   Enviar solicitação
                 </button>
                 <p className="text-center text-[11px] text-white/50">
-                  Ou fale direto no <a href="https://wa.me/5554999990000" className="underline hover:text-[color:var(--gold)]">WhatsApp comercial</a>.
+                  Ou fale direto no <a href="https://wa.me/5554933803839" className="underline hover:text-[color:var(--gold)]">WhatsApp comercial</a>.
                 </p>
               </div>
             )}

@@ -15,6 +15,8 @@ export const Route = createFileRoute("/sobre")({
         property: "og:description",
         content: "Curadoria de moda unissex — festa, alfaiataria e uniformes — em Caxias do Sul.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SobrePage,
