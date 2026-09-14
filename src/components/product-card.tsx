@@ -1,12 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { formatPrice, type Product } from "@/lib/products";
+import { BadgeCheck } from "lucide-react";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       to="/produto/$slug"
       params={{ slug: product.slug }}
-      className="group block"
+      className="group block border border-border bg-card transition-all duration-300 hover:border-gold hover:shadow-card"
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         <img
@@ -26,10 +27,12 @@ export function ProductCard({ product }: { product: Product }) {
           {product.occasion}
         </span>
       </div>
-      <div className="mt-4 flex flex-col gap-1">
-        <p className="eyebrow text-muted-foreground">{product.brand}</p>
-        <h3 className="font-serif text-lg leading-tight">{product.name}</h3>
-        <p className="text-sm text-[color:var(--gold)]">{formatPrice(product.price)}</p>
+      <div className="flex min-h-32 flex-col gap-2 p-4">
+        <p className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+          {product.brand} <BadgeCheck className="h-3.5 w-3.5 text-gold" aria-label="Vendedor verificado" />
+        </p>
+        <h3 className="text-base font-semibold leading-tight">{product.name}</h3>
+        <p className="mt-auto text-sm font-semibold text-foreground">{formatPrice(product.price)}</p>
       </div>
     </Link>
   );

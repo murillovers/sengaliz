@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { products, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 
@@ -15,6 +17,12 @@ export function CategoryPage({
   hero: string;
   items: Product[];
 }) {
+  const [filters, setFilters] = useState({ atelier: "Todos", tecido: "Todos", corte: "Todos", regiao: "Todas" });
+  const filteredItems = useMemo(
+    () => items.filter((item) => filters.atelier === "Todos" || item.brand === filters.atelier),
+    [filters.atelier, items],
+  );
+
   return (
     <div>
       <section className="relative isolate flex min-h-[52vh] items-end overflow-hidden bg-black text-white">
@@ -28,17 +36,19 @@ export function CategoryPage({
       </section>
 
       <section className="container-page py-16">
-        <div className="mb-8 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.24em] text-muted-foreground">
-          <span className="rounded-full border border-border px-4 py-2">Todas</span>
-          <span className="rounded-full border border-border px-4 py-2">Casamento</span>
-          <span className="rounded-full border border-border px-4 py-2">Formatura</span>
-          <span className="rounded-full border border-border px-4 py-2">Corporativo</span>
-          <span className="rounded-full border border-border px-4 py-2">Réveillon</span>
+        <div className="mb-10 border-y border-border bg-surface py-4">
+          <div className="mb-3 flex items-center gap-2 px-4 text-[11px] font-medium uppercase tracking-[0.18em]"><SlidersHorizontal className="h-4 w-4 text-gold" /> Refine sua curadoria</div>
+          <div className="grid gap-3 px-4 sm:grid-cols-2 lg:grid-cols-4">
+            <Filter label="Ateliê" value={filters.atelier} options={["Todos", ...new Set(items.map((item) => item.brand))]} onChange={(value) => setFilters({ ...filters, atelier: value })} />
+            <Filter label="Tipo de tecido" value={filters.tecido} options={["Todos", "Lã fria", "Seda", "Veludo", "Linho"]} onChange={(value) => setFilters({ ...filters, tecido: value })} />
+            <Filter label="Corte" value={filters.corte} options={["Todos", "Clássico", "Slim", "Contemporâneo"]} onChange={(value) => setFilters({ ...filters, corte: value })} />
+            <Filter label="Região" value={filters.regiao} options={["Todas", "Serra Gaúcha", "Sul", "Nacional"]} onChange={(value) => setFilters({ ...filters, regiao: value })} />
+          </div>
         </div>
 
-        {items.length ? (
+        {filteredItems.length ? (
           <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-            {items.map((p) => (
+            {filteredItems.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
@@ -49,6 +59,18 @@ export function CategoryPage({
         )}
       </section>
     </div>
+  );
+}
+
+function Filter({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (value: string) => void }) {
+  return (
+    <label className="relative block">
+      <span className="sr-only">{label}</span>
+      <select value={value} onChange={(event) => onChange(event.target.value)} className="h-11 w-full appearance-none border border-border bg-background px-3 pr-9 text-[11px] font-medium uppercase tracking-[0.12em] outline-none focus:border-gold">
+        {options.map((option) => <option key={option} value={option}>{label}: {option}</option>)}
+      </select>
+      <ChevronDown className="pointer-events-none absolute right-3 top-3.5 h-4 w-4 text-gold" />
+    </label>
   );
 }
 
@@ -63,6 +85,8 @@ export const createCategoryRoute = (
         { name: "description", content: config.description },
         { property: "og:title", content: `${config.title} — Sengaliz` },
         { property: "og:description", content: config.description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
     }),
     component: () => (
