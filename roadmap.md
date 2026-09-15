@@ -11,3 +11,4 @@
 - [ ] Trocar a foto principal da Home por still-life sem pessoas reconhecíveis
 - [ ] Validar catálogo, produto e sacola em desktop e celular
 - [ ] Manter logo e emblema atuais sem alterações
+- [ ] Adicionar integrações de agentes (MCP) para consultar o catálogo público da Sengaliz
