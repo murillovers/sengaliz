@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Search, Heart, ShoppingBag } from "lucide-react";
-import logo from "@/assets/sengaliz-marketplace-logo.webp.asset.json";
-import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
+import logo from "@/assets/sengaliz-logo-transparente.png.asset.json";
+import emblem from "@/assets/sengaliz-emblema-transparente.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/components/cart-context";
 
