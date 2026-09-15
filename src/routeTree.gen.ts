@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UniformesRouteImport } from './routes/uniformes'
 import { Route as StylingRouteImport } from './routes/styling'
 import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MasculinoRouteImport } from './routes/masculino'
 import { Route as FestaRouteImport } from './routes/festa'
 import { Route as FemininoRouteImport } from './routes/feminino'
@@ -19,6 +20,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as AlfaiatariaRouteImport } from './routes/alfaiataria'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProdutoSlugRouteImport } from './routes/produto.$slug'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 
 const UniformesRoute = UniformesRouteImport.update({
   id: '/uniformes',
@@ -33,6 +35,11 @@ const StylingRoute = StylingRouteImport.update({
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
   path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasculinoRoute = MasculinoRouteImport.update({
@@ -70,6 +77,12 @@ const ProdutoSlugRoute = ProdutoSlugRouteImport.update({
   path: '/produto/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,9 +91,11 @@ export interface FileRoutesByFullPath {
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
   '/masculino': typeof MasculinoRoute
+  '/mcp': typeof McpRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
   '/uniformes': typeof UniformesRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesByTo {
@@ -90,9 +105,11 @@ export interface FileRoutesByTo {
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
   '/masculino': typeof MasculinoRoute
+  '/mcp': typeof McpRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
   '/uniformes': typeof UniformesRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRoutesById {
@@ -103,9 +120,11 @@ export interface FileRoutesById {
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
   '/masculino': typeof MasculinoRoute
+  '/mcp': typeof McpRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
   '/uniformes': typeof UniformesRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/produto/$slug': typeof ProdutoSlugRoute
 }
 export interface FileRouteTypes {
@@ -117,9 +136,11 @@ export interface FileRouteTypes {
     | '/feminino'
     | '/festa'
     | '/masculino'
+    | '/mcp'
     | '/sobre'
     | '/styling'
     | '/uniformes'
+    | '/.well-known/oauth-protected-resource'
     | '/produto/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -129,9 +150,11 @@ export interface FileRouteTypes {
     | '/feminino'
     | '/festa'
     | '/masculino'
+    | '/mcp'
     | '/sobre'
     | '/styling'
     | '/uniformes'
+    | '/.well-known/oauth-protected-resource'
     | '/produto/$slug'
   id:
     | '__root__'
@@ -141,9 +164,11 @@ export interface FileRouteTypes {
     | '/feminino'
     | '/festa'
     | '/masculino'
+    | '/mcp'
     | '/sobre'
     | '/styling'
     | '/uniformes'
+    | '/.well-known/oauth-protected-resource'
     | '/produto/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -154,9 +179,11 @@ export interface RootRouteChildren {
   FemininoRoute: typeof FemininoRoute
   FestaRoute: typeof FestaRoute
   MasculinoRoute: typeof MasculinoRoute
+  McpRoute: typeof McpRoute
   SobreRoute: typeof SobreRoute
   StylingRoute: typeof StylingRoute
   UniformesRoute: typeof UniformesRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ProdutoSlugRoute: typeof ProdutoSlugRoute
 }
 
@@ -181,6 +208,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre'
       fullPath: '/sobre'
       preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/masculino': {
@@ -232,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProdutoSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -242,9 +283,12 @@ const rootRouteChildren: RootRouteChildren = {
   FemininoRoute: FemininoRoute,
   FestaRoute: FestaRoute,
   MasculinoRoute: MasculinoRoute,
+  McpRoute: McpRoute,
   SobreRoute: SobreRoute,
   StylingRoute: StylingRoute,
   UniformesRoute: UniformesRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ProdutoSlugRoute: ProdutoSlugRoute,
 }
 export const routeTree = rootRouteImport

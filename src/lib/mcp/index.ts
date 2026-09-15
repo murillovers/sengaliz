@@ -1,0 +1,11 @@
+import { defineMcp } from "@lovable.dev/mcp-js";
+import getProductTool from "./tools/get-product";
+import listProductsTool from "./tools/list-products";
+
+export default defineMcp({
+  name: "sengaliz-style-uniforms",
+  title: "Sengaliz: Style & Uniforms",
+  version: "0.1.0",
+  instructions: "Consulte o catálogo público da Sengaliz. Use list_products para descobrir peças e get_product para ver os detalhes de uma peça específica.",
+  tools: [listProductsTool, getProductTool],
+});
