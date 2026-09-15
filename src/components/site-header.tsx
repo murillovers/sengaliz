@@ -4,19 +4,20 @@ import { Menu, X, Search, Heart, ShoppingBag } from "lucide-react";
 import logo from "@/assets/sengaliz-marketplace-logo.webp.asset.json";
 import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/components/cart-context";
 
 const nav = [
   { to: "/alfaiataria", label: "Alfaiataria" },
   { to: "/festa", label: "Festa & Eventos" },
   { to: "/feminino", label: "Feminino" },
   { to: "/masculino", label: "Masculino" },
-  { to: "/marcas", label: "Marcas" },
   { to: "/uniformes", label: "Uniformes" },
 ];
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { itemCount, openCart } = useCart();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
@@ -43,7 +44,7 @@ export function SiteHeader() {
           className="hidden min-h-11 max-w-xs items-center gap-3 border-b border-border text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-gold hover:text-foreground lg:flex"
           aria-expanded={searchOpen}
         >
-          <Search className="h-4 w-4" /> Produtos, alfaiates ou ateliês
+          <Search className="h-4 w-4" /> Buscar produtos
         </Button>
 
         <Link to="/" className="flex justify-center">
@@ -57,10 +58,10 @@ export function SiteHeader() {
           <Button variant="ghost" size="icon" aria-label="Favoritos" className="hidden sm:inline-flex">
             <Heart className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Sacola" className="relative">
+          <Button variant="ghost" size="icon" aria-label={`Sacola com ${itemCount} ${itemCount === 1 ? "item" : "itens"}`} className="relative" onClick={openCart}>
             <ShoppingBag className="h-5 w-5" />
             <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-[9px] font-medium text-graphite">
-              0
+              {itemCount > 99 ? "99+" : itemCount}
             </span>
           </Button>
         </div>
@@ -69,8 +70,8 @@ export function SiteHeader() {
       {searchOpen && (
         <div className="border-t border-border bg-surface">
           <form className="container-page flex py-3" onSubmit={(event) => event.preventDefault()}>
-            <label className="sr-only" htmlFor="market-search">Buscar no marketplace</label>
-            <input id="market-search" autoFocus placeholder="Busque produtos, alfaiates ou ateliês" className="h-11 flex-1 border border-border bg-background px-4 text-sm outline-none focus:border-gold" />
+            <label className="sr-only" htmlFor="market-search">Buscar produtos</label>
+            <input id="market-search" autoFocus placeholder="Busque produtos Sengaliz" className="h-11 flex-1 border border-border bg-background px-4 text-sm outline-none focus:border-gold" />
             <Button type="submit" aria-label="Executar busca"><Search className="h-4 w-4" /> Buscar</Button>
           </form>
         </div>

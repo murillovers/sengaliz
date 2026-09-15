@@ -15,6 +15,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { Button } from "@/components/ui/button";
+import { CartProvider } from "@/components/cart-context";
+import { CartDrawer } from "@/components/cart-drawer";
 
 function NotFoundComponent() {
   return (
@@ -80,9 +82,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
       { property: "og:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
       { name: "twitter:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
-      { name: "description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
-      { property: "og:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
-      { name: "twitter:description", content: "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { name: "description", content: "Estúdio de costura em Caxias do Sul: alfaiataria própria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { property: "og:description", content: "Estúdio de costura em Caxias do Sul: alfaiataria própria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
+      { name: "twitter:description", content: "Estúdio de costura em Caxias do Sul: alfaiataria própria, looks de festa, styling personalizado e uniformes corporativos sob demanda." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -120,14 +122,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col bg-background text-foreground">
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <WhatsAppFab />
-      </div>
+      <CartProvider>
+        <div className="flex min-h-screen flex-col bg-background text-foreground">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <WhatsAppFab />
+          <CartDrawer />
+        </div>
+      </CartProvider>
     </QueryClientProvider>
   );
 }

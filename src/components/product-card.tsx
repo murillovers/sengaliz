@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { formatPrice, type Product } from "@/lib/products";
-import { BadgeCheck } from "lucide-react";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -28,9 +27,6 @@ export function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
       <div className="flex min-h-32 flex-col gap-2 p-4">
-        <p className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-          {product.brand} <BadgeCheck className="h-3.5 w-3.5 text-gold" aria-label="Vendedor verificado" />
-        </p>
         <h3 className="text-base font-semibold leading-tight">{product.name}</h3>
         <p className="mt-auto text-sm font-semibold text-foreground">{formatPrice(product.price)}</p>
       </div>
