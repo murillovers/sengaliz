@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, MapPin, Mail, Phone } from "lucide-react";
-import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
+import emblem from "@/assets/sengaliz-emblema-transparente.png.asset.json";
 import { Butterfly } from "./butterfly";
 
 export function SiteFooter() {
