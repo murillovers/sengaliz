@@ -34,8 +34,8 @@ function Home() {
       {/* HERO */}
       <section className="relative isolate flex min-h-[92vh] items-end overflow-hidden bg-black text-white">
         <img
-          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80"
-          alt="Editorial Sengaliz — look de festa"
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1920&q=85"
+          alt="Peças de alfaiataria expostas em ambiente de ateliê"
           className="absolute inset-0 h-full w-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
