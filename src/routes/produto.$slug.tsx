@@ -3,6 +3,8 @@ import { Heart, ShieldCheck, Truck, Ruler } from "lucide-react";
 import { products, formatPrice, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useCart } from "@/components/cart-context";
 
 export const Route = createFileRoute("/produto/$slug")({
   head: ({ params }) => {
@@ -10,10 +12,10 @@ export const Route = createFileRoute("/produto/$slug")({
     return {
       meta: p
         ? [
-            { title: `${p.name} — ${p.brand} | Sengaliz` },
-            { name: "description", content: `${p.name} por ${p.brand}. ${formatPrice(p.price)}. Curadoria Sengaliz.` },
+            { title: `${p.name} | Sengaliz` },
+            { name: "description", content: `${p.name} por ${formatPrice(p.price)}. Criação Sengaliz.` },
             { property: "og:title", content: `${p.name} — Sengaliz` },
-            { property: "og:description", content: `${p.brand} • ${p.occasion}` },
+            { property: "og:description", content: `Criação Sengaliz • ${p.occasion}` },
             { property: "og:type", content: "website" },
             { name: "twitter:card", content: "summary_large_image" },
             { property: "og:image", content: p.image },
@@ -47,6 +49,9 @@ export const Route = createFileRoute("/produto/$slug")({
 
 function ProductPage() {
   const product: Product | undefined = Route.useLoaderData();
+  const [selectedSize, setSelectedSize] = useState<string>();
+  const [sizeError, setSizeError] = useState(false);
+  const { addItem } = useCart();
   if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
 
@@ -60,7 +65,7 @@ function ProductPage() {
         </div>
 
         <div className="md:sticky md:top-28 md:h-fit">
-          <p className="eyebrow text-[color:var(--gold)]">{product.brand}</p>
+          <p className="eyebrow text-[color:var(--gold)]">Criação Sengaliz</p>
           <h1 className="mt-3 font-serif text-4xl md:text-5xl">{product.name}</h1>
           <p className="mt-2 text-sm text-muted-foreground">Ideal para: {product.occasion}</p>
           <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">{formatPrice(product.price)}</p>
@@ -70,18 +75,19 @@ function ProductPage() {
             <p className="eyebrow">Tamanho</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {["PP", "P", "M", "G", "GG"].map((s) => (
-                <Button key={s} variant="outline" size="icon" aria-label={`Selecionar tamanho ${s}`}>
+                <Button key={s} variant={selectedSize === s ? "gold" : "outline"} size="icon" aria-pressed={selectedSize === s} onClick={() => { setSelectedSize(s); setSizeError(false); }} aria-label={`Selecionar tamanho ${s}`}>
                   {s}
                 </Button>
               ))}
             </div>
+            {sizeError && <p className="mt-3 text-xs font-medium text-destructive" role="alert">Selecione um tamanho para adicionar à sacola.</p>}
             <button className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
               <Ruler className="h-3.5 w-3.5" /> Guia de tamanhos
             </button>
           </div>
 
           <div className="mt-8 flex gap-3">
-            <Button className="flex-1" size="lg">
+            <Button className="flex-1" size="lg" onClick={() => { if (!selectedSize) { setSizeError(true); return; } addItem(product, selectedSize); }}>
               Adicionar à sacola
             </Button>
             <Button aria-label="Favoritar" variant="outline" size="icon" className="h-12 w-12">

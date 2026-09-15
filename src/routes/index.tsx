@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, MapPin, Truck, ShieldCheck, Calendar } from "lucide-react";
-import { products, brands } from "@/lib/products";
+import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { ButterflyDivider, Butterfly } from "@/components/butterfly";
-import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,13 +11,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
+          "Estúdio de costura em Caxias do Sul: alfaiataria própria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
       },
       { property: "og:title", content: "Sengaliz — Moda de festa e alfaiataria unissex | Caxias do Sul" },
       {
         property: "og:description",
         content:
-          "Multimarcas de curadoria em Caxias do Sul: alfaiataria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
+          "Estúdio de costura em Caxias do Sul: alfaiataria própria, looks de festa, styling personalizado e uniformes corporativos sob demanda.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -139,53 +138,6 @@ function Home() {
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
           {highlights.map((p) => (
             <ProductCard key={p.slug} product={p} />
-          ))}
-        </div>
-      </section>
-
-      {/* BRANDS */}
-      <section className="border-y border-border bg-[color:var(--muted)] py-16">
-        <div className="container-page">
-          <img src={emblem.url} alt="Emblema oficial Sengaliz" className="mx-auto mb-6 h-20 w-20 border border-gold/30 object-cover" loading="lazy" />
-          <p className="eyebrow text-center text-[color:var(--gold)]">Ateliês e marcas parceiras verificadas</p>
-          <div className="mt-10 grid grid-cols-2 items-center gap-8 md:grid-cols-6">
-            {brands.map((b) => (
-              <div key={b} className="text-center font-serif text-lg text-foreground/60 transition-colors hover:text-foreground">
-                {b}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="container-page py-24">
-        <div className="grid gap-16 md:grid-cols-3">
-          {[
-            {
-              q: "Fui recebida no provador com uma seleção que parecia feita à mão para mim. Saí com o vestido de formatura dos sonhos.",
-              a: "Marina B.",
-              t: "Formatura Direito",
-            },
-            {
-              q: "A alfaiataria caiu impecável. Voltei duas semanas depois para vestir toda a equipe de padrinhos.",
-              a: "Ricardo M.",
-              t: "Casamento",
-            },
-            {
-              q: "Uniformizei a recepção da clínica com peças que continuam elegantes depois de meses de uso diário.",
-              a: "Clínica Vértice",
-              t: "Uniformes corporativos",
-            },
-          ].map((t) => (
-            <figure key={t.a} className="flex flex-col gap-6">
-              <Sparkles className="h-5 w-5 text-[color:var(--gold)]" />
-              <blockquote className="font-serif text-xl leading-snug">"{t.q}"</blockquote>
-              <figcaption className="border-t border-border pt-4 text-sm">
-                <span className="block font-medium">{t.a}</span>
-                <span className="text-muted-foreground">{t.t}</span>
-              </figcaption>
-            </figure>
           ))}
         </div>
       </section>

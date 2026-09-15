@@ -30,7 +30,7 @@ function ContatoPage() {
           <div className="space-y-6 text-sm">
             <Item icon={MapPin} t="Endereço" d="R. Reinaldo Gazola, 348 - Sl Aérea C - Sanvitto, Caxias do Sul - RS, 95099-250" />
             <Item icon={Phone} t="Telefone / WhatsApp" d="(54) 93380-3839" />
-            <Item icon={Mail} t="E-mail" d="ola@sengaliz.com.br" />
+            <Item icon={Mail} t="E-mail" d="sengaliz1702@gmail.com" />
             <Item
               icon={Clock}
               t="Horário"

@@ -8,7 +8,7 @@ export const Route = createFileRoute("/sobre")({
       {
         name: "description",
         content:
-          "A história da Sengaliz: multimarcas unissex de festa, alfaiataria e uniformes, com curadoria de estilo em Caxias do Sul.",
+          "A história da Sengaliz: estúdio de costura unissex para festa, alfaiataria e uniformes, com atendimento em Caxias do Sul.",
       },
       { property: "og:title", content: "Sobre a Sengaliz" },
       {
@@ -36,8 +36,8 @@ function SobrePage() {
             festa e alfaiataria, sem gênero definido, com atendimento consultivo.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Somos uma multimarcas de curadoria — não uma loja de estoque. Cada peça é escolhida pelo caimento,
-            pelo tecido e pela história por trás dela. Ao longo dos anos, expandimos para a confecção própria
+            Somos um estúdio de costura e alfaiataria própria. Cada peça é criada pensando no caimento,
+            no tecido e na história de quem vai vesti-la. Ao longo dos anos, expandimos para a confecção
             de uniformes corporativos, levando o mesmo padrão de alfaiataria ao dia a dia das empresas.
           </p>
         </div>
@@ -51,7 +51,7 @@ function SobrePage() {
       <section className="bg-black py-24 text-white">
         <div className="container-page grid gap-12 md:grid-cols-3">
           {[
-            { t: "Curadoria", d: "Marcas parceiras selecionadas por caimento, história e qualidade de tecido." },
+            { t: "Criação própria", d: "Peças Sengaliz desenvolvidas com atenção ao caimento, à história e à qualidade do tecido." },
             { t: "Atendimento", d: "Consultoria de styling presencial ou por videochamada, sem custo adicional." },
             { t: "Confecção própria", d: "Uniformes corporativos e casuais feitos sob demanda, com identidade visual da empresa." },
           ].map((v) => (

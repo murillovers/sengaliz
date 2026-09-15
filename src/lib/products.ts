@@ -13,7 +13,7 @@ export const products: Product[] = [
   {
     slug: "smoking-noir",
     name: "Smoking Noir Slim",
-    brand: "Atelier Sengaliz",
+    brand: "Sengaliz",
     price: 2890,
     category: "alfaiataria",
     occasion: "Casamento",
@@ -23,7 +23,7 @@ export const products: Product[] = [
   {
     slug: "vestido-dourado-lume",
     name: "Vestido Longo Lume",
-    brand: "Galia Prima",
+    brand: "Sengaliz",
     price: 3450,
     category: "festa",
     occasion: "Formatura",
@@ -33,7 +33,7 @@ export const products: Product[] = [
   {
     slug: "blazer-champagne",
     name: "Blazer Champagne Fluido",
-    brand: "Maison Vitrail",
+    brand: "Sengaliz",
     price: 1980,
     category: "feminino",
     occasion: "Corporativo",
@@ -43,7 +43,7 @@ export const products: Product[] = [
   {
     slug: "terno-obsidiana",
     name: "Terno Obsidiana",
-    brand: "Atelier Sengaliz",
+    brand: "Sengaliz",
     price: 3290,
     category: "alfaiataria",
     occasion: "Casamento",
@@ -53,7 +53,7 @@ export const products: Product[] = [
   {
     slug: "vestido-veludo-bordo",
     name: "Vestido Veludo Bordô",
-    brand: "Casa Elyra",
+    brand: "Sengaliz",
     price: 2790,
     category: "festa",
     occasion: "Réveillon",
@@ -63,7 +63,7 @@ export const products: Product[] = [
   {
     slug: "camisa-seda-perola",
     name: "Camisa Seda Pérola",
-    brand: "Maison Vitrail",
+    brand: "Sengaliz",
     price: 890,
     category: "masculino",
     occasion: "Festa",
@@ -73,7 +73,7 @@ export const products: Product[] = [
   {
     slug: "conjunto-alfaiataria-nude",
     name: "Conjunto Alfaiataria Nude",
-    brand: "Casa Elyra",
+    brand: "Sengaliz",
     price: 2450,
     category: "feminino",
     occasion: "Corporativo",
@@ -83,22 +83,13 @@ export const products: Product[] = [
   {
     slug: "vestido-metalico",
     name: "Vestido Metálico Astrée",
-    brand: "Galia Prima",
+    brand: "Sengaliz",
     price: 3990,
     category: "festa",
     occasion: "Gala",
     image: "https://images.unsplash.com/photo-1518049362265-d5b2a6b00b37?auto=format&fit=crop&w=1200&q=80",
     hover: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
   },
-];
-
-export const brands = [
-  "Atelier Sengaliz",
-  "Galia Prima",
-  "Maison Vitrail",
-  "Casa Elyra",
-  "Studio Aureo",
-  "Linhas do Sul",
 ];
 
 export const formatPrice = (v: number) =>

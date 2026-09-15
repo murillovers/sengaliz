@@ -17,10 +17,10 @@ export function CategoryPage({
   hero: string;
   items: Product[];
 }) {
-  const [filters, setFilters] = useState({ atelier: "Todos", tecido: "Todos", corte: "Todos", regiao: "Todas" });
+  const [filters, setFilters] = useState({ tecido: "Todos", corte: "Todos", regiao: "Todas" });
   const filteredItems = useMemo(
-    () => items.filter((item) => filters.atelier === "Todos" || item.brand === filters.atelier),
-    [filters.atelier, items],
+    () => items,
+    [items],
   );
 
   return (
@@ -38,8 +38,7 @@ export function CategoryPage({
       <section className="container-page py-16">
         <div className="mb-10 border-y border-border bg-surface py-4">
           <div className="mb-3 flex items-center gap-2 px-4 text-[11px] font-medium uppercase tracking-[0.18em]"><SlidersHorizontal className="h-4 w-4 text-gold" /> Refine sua curadoria</div>
-          <div className="grid gap-3 px-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Filter label="Ateliê" value={filters.atelier} options={["Todos", ...new Set(items.map((item) => item.brand))]} onChange={(value) => setFilters({ ...filters, atelier: value })} />
+          <div className="grid gap-3 px-4 sm:grid-cols-3">
             <Filter label="Tipo de tecido" value={filters.tecido} options={["Todos", "Lã fria", "Seda", "Veludo", "Linho"]} onChange={(value) => setFilters({ ...filters, tecido: value })} />
             <Filter label="Corte" value={filters.corte} options={["Todos", "Clássico", "Slim", "Contemporâneo"]} onChange={(value) => setFilters({ ...filters, corte: value })} />
             <Filter label="Região" value={filters.regiao} options={["Todas", "Serra Gaúcha", "Sul", "Nacional"]} onChange={(value) => setFilters({ ...filters, regiao: value })} />

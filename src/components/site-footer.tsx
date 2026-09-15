@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook, MapPin, Mail, Phone } from "lucide-react";
+import { Instagram, MapPin, Mail, Phone } from "lucide-react";
 import emblem from "@/assets/sengaliz-emblema.jpg.asset.json";
 import { Butterfly } from "./butterfly";
 
@@ -15,11 +15,8 @@ export function SiteFooter() {
               Caxias do Sul — RS.
             </p>
             <div className="mt-6 flex gap-4">
-              <a href="#" aria-label="Instagram" className="hover:text-[color:var(--gold)]">
+              <a href="https://www.instagram.com/sengalizoficial" target="_blank" rel="noreferrer" aria-label="Instagram da Sengaliz" className="hover:text-[color:var(--gold)]">
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" aria-label="Facebook" className="hover:text-[color:var(--gold)]">
-                <Facebook className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -31,7 +28,6 @@ export function SiteFooter() {
               <li><Link to="/festa" className="hover:text-white">Festa & Eventos</Link></li>
               <li><Link to="/feminino" className="hover:text-white">Feminino</Link></li>
               <li><Link to="/masculino" className="hover:text-white">Masculino</Link></li>
-              <li><Link to="/marcas" className="hover:text-white">Marcas parceiras</Link></li>
             </ul>
           </div>
 
@@ -51,7 +47,7 @@ export function SiteFooter() {
             <ul className="mt-5 space-y-3 text-sm">
               <li className="flex gap-3"><MapPin className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> R. Reinaldo Gazola, 348 - Sl Aérea C - Sanvitto, Caxias do Sul - RS, 95099-250</li>
               <li className="flex gap-3"><Phone className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> (54) 93380-3839</li>
-              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> ola@sengaliz.com.br</li>
+              <li className="flex gap-3"><Mail className="mt-0.5 h-4 w-4 flex-none text-[color:var(--gold)]" /> sengaliz1702@gmail.com</li>
             </ul>
           </div>
         </div>
@@ -61,7 +57,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-4 border-t border-primary-foreground/10 pt-8 text-xs text-primary-foreground/50 md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} Sengaliz Alfaiataria & Marketplace. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Sengaliz Estúdio de Costura & Alfaiataria. Todos os direitos reservados.</p>
           <div className="flex items-center gap-3">
             <span>Pagamento seguro</span>
             <span className="rounded border border-white/20 px-2 py-1">Pix</span>
