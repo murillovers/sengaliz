@@ -13,9 +13,9 @@ export const Route = createFileRoute("/produto/$slug")({
       meta: p
         ? [
             { title: `${p.name} | Sengaliz` },
-            { name: "description", content: `${p.name} por ${formatPrice(p.price)}. Criação Sengaliz.` },
+            { name: "description", content: p.description ?? `${p.name} por ${formatPrice(p.price)}. Criação Sengaliz.` },
             { property: "og:title", content: `${p.name} — Sengaliz` },
-            { property: "og:description", content: `Criação Sengaliz • ${p.occasion}` },
+            { property: "og:description", content: p.description ?? `Criação Sengaliz • ${p.occasion}` },
             { property: "og:type", content: "website" },
             { name: "twitter:card", content: "summary_large_image" },
             { property: "og:image", content: p.image },
@@ -65,7 +65,7 @@ function ProductPage() {
         </div>
 
         <div className="md:sticky md:top-28 md:h-fit">
-          <p className="eyebrow text-[color:var(--gold)]">Criação Sengaliz</p>
+          <p className="eyebrow text-[color:var(--gold)]">{product.line ?? "Criação Sengaliz"}</p>
           <h1 className="mt-3 font-serif text-4xl md:text-5xl">{product.name}</h1>
           <p className="mt-2 text-sm text-muted-foreground">Ideal para: {product.occasion}</p>
           <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">{formatPrice(product.price)}</p>
@@ -108,10 +108,7 @@ function ProductPage() {
           </div>
 
           <div className="mt-10 border-t border-border pt-6 text-sm leading-relaxed text-muted-foreground">
-            <p>
-              Peça de curadoria Sengaliz, selecionada pelo caimento e pelo acabamento. Tecido nobre, forro
-              interno e detalhes de alfaiataria. Composição e cuidados enviados junto à etiqueta.
-            </p>
+            <p>{product.description ?? "Peça de criação Sengaliz, desenvolvida com atenção ao caimento, à construção e aos acabamentos de alfaiataria. Composição e cuidados acompanham a etiqueta."}</p>
           </div>
         </div>
       </section>
