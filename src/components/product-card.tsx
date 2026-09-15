@@ -23,7 +23,7 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
         />
         <span className="absolute left-4 top-4 border border-white/70 bg-black/30 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur">
-          {product.occasion}
+          {product.line ?? product.occasion}
         </span>
       </div>
       <div className="flex min-h-32 flex-col gap-2 p-4">

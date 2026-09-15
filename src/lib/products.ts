@@ -101,8 +101,8 @@ export const products: Product[] = [
     occasion: "Rotina executiva e reuniões informais",
     line: "Executiva",
     description: "Polo em piquê premium de algodão com elastano, corte reto estruturado e gola entretelada. Acabamento com vista reforçada, botões foscos e costuras internas limpas para o escritório e compromissos profissionais.",
-    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "polo-executiva-perola",
@@ -113,8 +113,8 @@ export const products: Product[] = [
     occasion: "Escritório, viagens e atendimento ao cliente",
     line: "Executiva",
     description: "Polo em malha dupla de algodão penteado, modelagem levemente acinturada e manga com proporção alongada. Gola firme, bainha rebatida e acabamento interno em viés asseguram presença profissional com conforto prolongado.",
-    image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "polo-operacional-marinho",
@@ -125,8 +125,8 @@ export const products: Product[] = [
     occasion: "Equipes técnicas, atendimento e uso diário",
     line: "Operacional",
     description: "Polo em piquê tecnológico de alta resistência, corte confortável com mobilidade nos ombros e fendas laterais. Possui gola estabilizada, pespontos duplos e acabamento reforçado para jornadas intensas e uniformização de equipes.",
-    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "camisa-executiva-tricoline",
@@ -137,8 +137,8 @@ export const products: Product[] = [
     occasion: "Reuniões, cerimônias e eventos corporativos",
     line: "Executiva",
     description: "Camisa em tricoline 100% algodão de fio longo, corte slim sem restringir os movimentos e colarinho estruturado. Punhos ajustáveis, botões de madrepérola e costura francesa completam o acabamento de alfaiataria.",
-    image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "camisa-feminina-crepe",
@@ -149,8 +149,8 @@ export const products: Product[] = [
     occasion: "Ambientes executivos e ocasiões sociais",
     line: "Alfaiataria Feminina",
     description: "Camisa em crepe encorpado com toque macio, corte fluido e pala traseira que favorece o caimento. Gola alongada, punhos largos e fechamento com botões forrados criam um acabamento refinado para alfaiataria feminina.",
-    image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "camisa-termica-flanela",
@@ -161,8 +161,8 @@ export const products: Product[] = [
     occasion: "Inverno urbano, viagens e trabalho externo",
     line: "Térmica",
     description: "Camisa em flanela de lã merino com trama térmica respirável, corte regular próprio para sobreposição e pala dupla. Costuras reforçadas, punhos ajustáveis e acabamento interno macio protegem nos dias frios sem excesso de volume.",
-    image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "calca-alfaiataria-cintura-alta",
@@ -173,8 +173,8 @@ export const products: Product[] = [
     occasion: "Trabalho, eventos e composições formais",
     line: "Alfaiataria Feminina",
     description: "Calça em lã fria com elastano, cintura alta anatômica e perna reta de vinco marcado. Cós interno estruturado, bolsos embutidos e barra invisível entregam acabamento sob medida para conjuntos e produções formais.",
-    image: "https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "calca-termica-flanela",
@@ -185,8 +185,8 @@ export const products: Product[] = [
     occasion: "Inverno executivo e compromissos formais",
     line: "Térmica",
     description: "Calça em flanela de lã penteada com isolamento natural, corte reto contemporâneo e pregas discretas. Forro parcial, bolsos de vivo e bainha feita à mão oferecem conforto térmico com acabamento preciso de alfaiataria.",
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1200&q=80",
   },
   {
     slug: "calca-operacional-sarja",
@@ -197,8 +197,8 @@ export const products: Product[] = [
     occasion: "Operações, atendimento e visitas técnicas",
     line: "Operacional",
     description: "Calça em sarja técnica de algodão com elastano, corte reto ergonômico e reforço nas áreas de maior atrito. Bolsos funcionais discretos, travetes de segurança e acabamento resistente unem apresentação profissional e mobilidade diária.",
-    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=1200&q=80",
-    hover: "https://images.unsplash.com/photo-1496217590455-aa63a8350eea?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1200&q=80",
+    hover: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
