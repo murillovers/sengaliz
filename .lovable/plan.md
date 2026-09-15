@@ -1,19 +1,20 @@
-# Loja Sengaliz e sacola pelo WhatsApp
+# Expansão do catálogo e nova foto principal
 
 ## Objetivo
-Transformar o catálogo em uma loja exclusiva da Sengaliz, remover conteúdos fictícios e disponibilizar uma sacola funcional.
+Ampliar o catálogo com nove peças próprias da Sengaliz e substituir a foto principal da página inicial por uma composição de alfaiataria sem pessoas reconhecíveis.
 
 ## Alterações
-- Padronizar todos os produtos como Sengaliz e retirar a marca redundante dos cards.
-- Remover a página e todos os links de “Marcas”, além das seções de marcas parceiras e depoimentos da página inicial.
-- Atualizar o e-mail, vincular o Instagram oficial e retirar o Facebook do rodapé.
-- Criar uma sacola compartilhada entre páginas, preservada no navegador, com quantidade, remoção e total.
-- Fazer o botão de compra exigir um tamanho e adicionar o produto escolhido à sacola.
-- Abrir a sacola em painel lateral pelo cabeçalho e finalizar com um resumo formatado no WhatsApp da Sengaliz.
-- Atualizar textos de apresentação que ainda descrevem a Sengaliz como marketplace ou multimarcas, sem alterar fotos ou cores.
+- Adicionar 9 produtos: 3 polos premium, 3 camisas e 3 calças de alfaiataria.
+- Identificar em cada produto a linha Sengaliz correspondente, distribuindo as peças entre Executiva, Alfaiataria Feminina, Térmica e Operacional.
+- Criar para cada peça uma descrição exclusiva com tecido, corte, acabamento e ocasião de uso.
+- Definir preços compatíveis com confecção própria e alfaiataria sob medida.
+- Usar somente fotos do Unsplash com a roupa isolada, em flat lay, cabide ou manequim, sem rosto ou pessoa reconhecível.
+- Exibir a linha e a descrição específica na página de cada produto, substituindo o texto genérico atual.
+- Trocar apenas a foto de fundo da abertura da Home por uma imagem still-life de alfaiataria ou ambiente de ateliê, preservando textos, estrutura e cores.
+- Manter os arquivos atuais de logo e emblema sem qualquer alteração.
 
 ## Detalhes técnicos
-- Usar Context API do React para o estado da sacola e `localStorage` somente após a página carregar, evitando diferenças entre servidor e navegador.
-- Manter o painel acessível, com fechamento por botão, fundo externo e tecla Escape.
-- Excluir a rota `/marcas` e não criar substituta.
-- Validar a página inicial, um produto e o fluxo completo da sacola em computador e celular.
+- Ampliar o tipo de produto com os campos de linha e descrição, preservando a compatibilidade com sacola, cards e páginas existentes.
+- Manter as categorias e rotas atuais; os novos itens serão distribuídos entre elas conforme o tipo de peça.
+- Confirmar visualmente que as imagens selecionadas não mostram rostos nem pessoas reconhecíveis.
+- Validar Home, catálogo, página de produto e sacola em computador e celular.
