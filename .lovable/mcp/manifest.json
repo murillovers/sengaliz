@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "sdk_version": "2.0.4",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "sengaliz-style-uniforms",
+      "version": "0.1.0",
+      "title": "Sengaliz: Style & Uniforms"
+    },
+    "tools": [
+      {
+        "name": "list_products",
+        "title": "Listar produtos",
+        "description": "Lista as peças públicas do catálogo Sengaliz, com filtros opcionais por categoria e linha.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string",
+              "enum": [
+                "alfaiataria",
+                "festa",
+                "feminino",
+                "masculino"
+              ],
+              "description": "Categoria do catálogo."
+            },
+            "line": {
+              "type": "string",
+              "enum": [
+                "Executiva",
+                "Alfaiataria Feminina",
+                "Térmica",
+                "Operacional"
+              ],
+              "description": "Linha de produto Sengaliz."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_product",
+        "title": "Consultar produto",
+        "description": "Consulta os detalhes públicos de uma peça Sengaliz pelo identificador do produto.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Identificador do produto, como polo-executiva-grafite."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
