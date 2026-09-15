@@ -13,7 +13,6 @@ import { Route as UniformesRouteImport } from './routes/uniformes'
 import { Route as StylingRouteImport } from './routes/styling'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as MasculinoRouteImport } from './routes/masculino'
-import { Route as MarcasRouteImport } from './routes/marcas'
 import { Route as FestaRouteImport } from './routes/festa'
 import { Route as FemininoRouteImport } from './routes/feminino'
 import { Route as ContatoRouteImport } from './routes/contato'
@@ -39,11 +38,6 @@ const SobreRoute = SobreRouteImport.update({
 const MasculinoRoute = MasculinoRouteImport.update({
   id: '/masculino',
   path: '/masculino',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MarcasRoute = MarcasRouteImport.update({
-  id: '/marcas',
-  path: '/marcas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FestaRoute = FestaRouteImport.update({
@@ -83,7 +77,6 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
-  '/marcas': typeof MarcasRoute
   '/masculino': typeof MasculinoRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
@@ -96,7 +89,6 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
-  '/marcas': typeof MarcasRoute
   '/masculino': typeof MasculinoRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
@@ -110,7 +102,6 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/feminino': typeof FemininoRoute
   '/festa': typeof FestaRoute
-  '/marcas': typeof MarcasRoute
   '/masculino': typeof MasculinoRoute
   '/sobre': typeof SobreRoute
   '/styling': typeof StylingRoute
@@ -125,7 +116,6 @@ export interface FileRouteTypes {
     | '/contato'
     | '/feminino'
     | '/festa'
-    | '/marcas'
     | '/masculino'
     | '/sobre'
     | '/styling'
@@ -138,7 +128,6 @@ export interface FileRouteTypes {
     | '/contato'
     | '/feminino'
     | '/festa'
-    | '/marcas'
     | '/masculino'
     | '/sobre'
     | '/styling'
@@ -151,7 +140,6 @@ export interface FileRouteTypes {
     | '/contato'
     | '/feminino'
     | '/festa'
-    | '/marcas'
     | '/masculino'
     | '/sobre'
     | '/styling'
@@ -165,7 +153,6 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   FemininoRoute: typeof FemininoRoute
   FestaRoute: typeof FestaRoute
-  MarcasRoute: typeof MarcasRoute
   MasculinoRoute: typeof MasculinoRoute
   SobreRoute: typeof SobreRoute
   StylingRoute: typeof StylingRoute
@@ -201,13 +188,6 @@ declare module '@tanstack/react-router' {
       path: '/masculino'
       fullPath: '/masculino'
       preLoaderRoute: typeof MasculinoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/marcas': {
-      id: '/marcas'
-      path: '/marcas'
-      fullPath: '/marcas'
-      preLoaderRoute: typeof MarcasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/festa': {
@@ -261,7 +241,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   FemininoRoute: FemininoRoute,
   FestaRoute: FestaRoute,
-  MarcasRoute: MarcasRoute,
   MasculinoRoute: MasculinoRoute,
   SobreRoute: SobreRoute,
   StylingRoute: StylingRoute,
