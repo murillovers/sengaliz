@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import type { OAuthAuthorizationDetails } from "@supabase/supabase-js";
 
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/.lovable/oauth/consent")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Autorizar integração | Sengaliz" },
@@ -159,7 +160,7 @@ function OAuthConsentPage() {
   );
 }
 
-function ConsentLayout({ children }: { children: React.ReactNode }) {
+function ConsentLayout({ children }: { children: ReactNode }) {
   return <main className="flex min-h-[70vh] items-center justify-center bg-background px-5 py-16"><section className="w-full max-w-xl border border-border bg-card p-7 shadow-modal sm:p-10">{children}</section></main>;
 }
 
