@@ -7,8 +7,7 @@
     "issuer": "https://nrnaevgwfzmlqdwxtrcm.supabase.co/auth/v1",
     "accepted_audiences": [
       "authenticated"
-    ],
-    "jwks_uri": "https://nrnaevgwfzmlqdwxtrcm.supabase.co/auth/v1/.well-known/jwks.json"
+    ]
   },
   "mcp": {
     "server": {
