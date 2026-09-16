@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, MapPin, Truck, ShieldCheck, Calendar } from "lucide-react";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
-import { ButterflyDivider, Butterfly } from "@/components/butterfly";
+import { Butterfly } from "@/components/butterfly";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const highlights = products.slice(0, 4);
+  const catalogProducts = products;
 
   return (
     <div>
@@ -68,6 +68,23 @@ function Home() {
         </div>
       </section>
 
+      {/* PRODUCTS */}
+      <section className="container-page py-20 md:py-24">
+        <div className="mb-12 max-w-2xl">
+          <p className="eyebrow text-[color:var(--gold)]">Catálogo Sengaliz</p>
+          <h2 className="mt-3 font-serif text-4xl md:text-5xl">Nossos produtos</h2>
+          <p className="mt-4 text-sm text-muted-foreground">
+            Alfaiataria, festa e peças profissionais desenvolvidas pelo estúdio.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
+          {catalogProducts.map((p) => (
+            <ProductCard key={p.slug} product={p} />
+          ))}
+        </div>
+      </section>
+
       {/* STYLING BLACK STRIP */}
       <section className="bg-black py-20 text-[color:var(--gold)]">
         <div className="container-page grid gap-10 md:grid-cols-[1fr_auto_1fr] md:items-center">
@@ -88,57 +105,6 @@ function Home() {
               Reservar horário <Calendar className="h-4 w-4" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* CATEGORIES */}
-      <section className="container-page py-24">
-        <div className="flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-[color:var(--gold)]">Curadoria</p>
-            <h2 className="mt-3 font-serif text-4xl md:text-5xl">Escolha por ocasião</h2>
-          </div>
-          <Link to="/festa" className="hidden text-xs uppercase tracking-[0.28em] text-muted-foreground hover:text-[color:var(--gold)] md:block">
-            Ver tudo →
-          </Link>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {[
-            { to: "/alfaiataria", label: "Alfaiataria", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80" },
-            { to: "/festa", label: "Festa & Eventos", img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80" },
-            { to: "/uniformes", label: "Uniformes", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80" },
-          ].map((c) => (
-            <Link to={c.to} key={c.to} className="group relative block aspect-[3/4] overflow-hidden bg-muted">
-              <img src={c.img} alt={c.label} className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-                <h3 className="font-serif text-3xl">{c.label}</h3>
-                <span className="mt-2 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-[color:var(--gold)]">
-                  Explorar <ArrowRight className="h-3 w-3" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <ButterflyDivider />
-
-      {/* HIGHLIGHTS */}
-      <section className="container-page pb-24">
-        <div className="mb-12 max-w-2xl">
-          <p className="eyebrow text-[color:var(--gold)]">Lançamentos</p>
-          <h2 className="mt-3 font-serif text-4xl md:text-5xl">Novidades para a próxima temporada</h2>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Selecionadas para casamentos, formaturas e réveillon. Peças em estoque limitado.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4">
-          {highlights.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
         </div>
       </section>
 

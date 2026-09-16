@@ -13,7 +13,14 @@ export const Route = createFileRoute("/produto/$slug")({
       meta: p
         ? [
             { title: `${p.name} | Sengaliz` },
-            { name: "description", content: p.description ?? `${p.name} por ${formatPrice(p.price)}. Criação Sengaliz.` },
+            {
+              name: "description",
+              content:
+                p.description ??
+                (p.priceOnRequest
+                  ? `${p.name}. Consulte disponibilidade com a Sengaliz.`
+                  : `${p.name} por ${formatPrice(p.price)}. Criação Sengaliz.`),
+            },
             { property: "og:title", content: `${p.name} — Sengaliz` },
             { property: "og:description", content: p.description ?? `Criação Sengaliz • ${p.occasion}` },
             { property: "og:type", content: "website" },
@@ -47,6 +54,26 @@ export const Route = createFileRoute("/produto/$slug")({
   component: ProductPage,
 });
 
+function ProductVisual({ product, className, primary = false }: { product: Product; className: string; primary?: boolean }) {
+  if (product.imagePosition) {
+    return (
+      <div
+        role={primary ? "img" : undefined}
+        aria-label={primary ? product.name : undefined}
+        aria-hidden={primary ? undefined : true}
+        className={`${className} bg-muted bg-cover bg-no-repeat`}
+        style={{
+          backgroundImage: `url(${product.image})`,
+          backgroundSize: "600% 300%",
+          backgroundPosition: product.imagePosition,
+        }}
+      />
+    );
+  }
+
+  return <img src={primary ? product.image : product.hover} alt={primary ? product.name : ""} className={`${className} object-cover`} />;
+}
+
 function ProductPage() {
   const product: Product | undefined = Route.useLoaderData();
   const [selectedSize, setSelectedSize] = useState<string>();
@@ -59,41 +86,80 @@ function ProductPage() {
     <div>
       <section className="container-page grid gap-12 py-12 md:grid-cols-2 md:py-16">
         <div className="grid grid-cols-2 gap-3">
-          <img src={product.image} alt={product.name} className="col-span-2 aspect-[3/4] w-full object-cover" />
-          <img src={product.hover} alt="" className="aspect-square w-full object-cover" />
-          <img src={product.image} alt="" className="aspect-square w-full object-cover" />
+          <ProductVisual product={product} primary className="col-span-2 aspect-[3/4] w-full" />
+          <ProductVisual product={product} className="aspect-square w-full" />
+          <ProductVisual product={product} primary className="aspect-square w-full" />
         </div>
 
         <div className="md:sticky md:top-28 md:h-fit">
           <p className="eyebrow text-[color:var(--gold)]">{product.line ?? "Criação Sengaliz"}</p>
           <h1 className="mt-3 font-serif text-4xl md:text-5xl">{product.name}</h1>
           <p className="mt-2 text-sm text-muted-foreground">Ideal para: {product.occasion}</p>
-          <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">{formatPrice(product.price)}</p>
-          <p className="mt-1 text-xs text-muted-foreground">Em até 6x sem juros no cartão</p>
+          <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">
+            {product.priceOnRequest ? "Sob consulta" : formatPrice(product.price)}
+          </p>
+          {!product.priceOnRequest && <p className="mt-1 text-xs text-muted-foreground">Em até 6x sem juros no cartão</p>}
 
-          <div className="mt-8">
-            <p className="eyebrow">Tamanho</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {["PP", "P", "M", "G", "GG"].map((s) => (
-                <Button key={s} variant={selectedSize === s ? "gold" : "outline"} size="icon" aria-pressed={selectedSize === s} onClick={() => { setSelectedSize(s); setSizeError(false); }} aria-label={`Selecionar tamanho ${s}`}>
-                  {s}
-                </Button>
-              ))}
+          {product.priceOnRequest ? (
+            <div className="mt-8">
+              <Link
+                to="/contato"
+                className="inline-flex min-h-12 w-full items-center justify-center border border-gold bg-gold-gradient px-6 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite transition-all hover:brightness-105"
+              >
+                Consultar disponibilidade
+              </Link>
             </div>
-            {sizeError && <p className="mt-3 text-xs font-medium text-destructive" role="alert">Selecione um tamanho para adicionar à sacola.</p>}
-            <button className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
-              <Ruler className="h-3.5 w-3.5" /> Guia de tamanhos
-            </button>
-          </div>
+          ) : (
+            <>
+              <div className="mt-8">
+                <p className="eyebrow">Tamanho</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["PP", "P", "M", "G", "GG"].map((s) => (
+                    <Button
+                      key={s}
+                      variant={selectedSize === s ? "gold" : "outline"}
+                      size="icon"
+                      aria-pressed={selectedSize === s}
+                      onClick={() => {
+                        setSelectedSize(s);
+                        setSizeError(false);
+                      }}
+                      aria-label={`Selecionar tamanho ${s}`}
+                    >
+                      {s}
+                    </Button>
+                  ))}
+                </div>
+                {sizeError && (
+                  <p className="mt-3 text-xs font-medium text-destructive" role="alert">
+                    Selecione um tamanho para adicionar à sacola.
+                  </p>
+                )}
+                <button className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
+                  <Ruler className="h-3.5 w-3.5" /> Guia de tamanhos
+                </button>
+              </div>
 
-          <div className="mt-8 flex gap-3">
-            <Button className="flex-1" size="lg" onClick={() => { if (!selectedSize) { setSizeError(true); return; } addItem(product, selectedSize); }}>
-              Adicionar à sacola
-            </Button>
-            <Button aria-label="Favoritar" variant="outline" size="icon" className="h-12 w-12">
-              <Heart className="h-5 w-5" />
-            </Button>
-          </div>
+              <div className="mt-8 flex gap-3">
+                <Button
+                  className="flex-1"
+                  size="lg"
+                  onClick={() => {
+                    if (!selectedSize) {
+                      setSizeError(true);
+                      return;
+                    }
+                    addItem(product, selectedSize);
+                  }}
+                >
+                  Adicionar à sacola
+                </Button>
+                <Button aria-label="Favoritar" variant="outline" size="icon" className="h-12 w-12">
+                  <Heart className="h-5 w-5" />
+                </Button>
+              </div>
+            </>
+          )}
 
           <div className="mt-6 border border-[color:var(--gold)]/40 bg-[color:var(--gold)]/5 p-4 text-xs">
             <p className="font-medium text-[color:var(--gold)]">Quer provar antes?</p>
