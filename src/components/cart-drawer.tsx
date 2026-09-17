@@ -3,6 +3,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "@/components/cart-context";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/products";
+import { getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 
 const WHATSAPP_NUMBER = "5554933803839";
 
@@ -33,7 +34,8 @@ export function CartDrawer() {
       "",
       ...lines,
       "",
-      `Total: ${formatPrice(total)}`,
+      `Total no cartão: ${formatPrice(total)}`,
+      `Total no Pix (${PIX_DISCOUNT_PERCENT}% de desconto): ${formatPrice(getPixPrice(total))}`,
       "",
       "Podem me orientar sobre pagamento e entrega?",
     ].join("\n");
@@ -64,39 +66,51 @@ export function CartDrawer() {
         ) : (
           <>
             <div className="flex-1 overflow-y-auto px-5 py-2 sm:px-7">
-              {items.map((item) => (
-                <article key={`${item.slug}-${item.size}`} className="grid grid-cols-[80px_1fr] gap-4 border-b border-border py-5">
-                  <img src={item.image} alt="" className="aspect-[3/4] w-20 object-cover" />
-                  <div className="min-w-0">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-sm font-semibold">{item.name}</h3>
-                        <p className="mt-1 text-xs text-muted-foreground">Tamanho {item.size}</p>
-                      </div>
-                      <Button variant="ghost" size="icon" className="h-9 w-9 flex-none" onClick={() => removeItem(item.slug, item.size)} aria-label={`Remover ${item.name}`}>
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="mt-4 flex items-center justify-between gap-3">
-                      <div className="flex h-10 items-center border border-border">
-                        <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity - 1)} disabled={item.quantity === 1} aria-label={`Diminuir quantidade de ${item.name}`}>
-                          <Minus className="h-3.5 w-3.5" />
-                        </Button>
-                        <span className="w-8 text-center text-sm" aria-label={`Quantidade ${item.quantity}`}>{item.quantity}</span>
-                        <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity + 1)} aria-label={`Aumentar quantidade de ${item.name}`}>
-                          <Plus className="h-3.5 w-3.5" />
+              {items.map((item) => {
+                const itemTotal = item.price * item.quantity;
+                return (
+                  <article key={`${item.slug}-${item.size}`} className="grid grid-cols-[80px_1fr] gap-4 border-b border-border py-5">
+                    <img src={item.image} alt="" className="aspect-[3/4] w-20 object-cover" />
+                    <div className="min-w-0">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-sm font-semibold">{item.name}</h3>
+                          <p className="mt-1 text-xs text-muted-foreground">Tamanho {item.size}</p>
+                        </div>
+                        <Button variant="ghost" size="icon" className="h-9 w-9 flex-none" onClick={() => removeItem(item.slug, item.size)} aria-label={`Remover ${item.name}`}>
+                          <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
-                      <p className="text-sm font-semibold">{formatPrice(item.price * item.quantity)}</p>
+                      <div className="mt-4 flex items-end justify-between gap-3">
+                        <div className="flex h-10 items-center border border-border">
+                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity - 1)} disabled={item.quantity === 1} aria-label={`Diminuir quantidade de ${item.name}`}>
+                            <Minus className="h-3.5 w-3.5" />
+                          </Button>
+                          <span className="w-8 text-center text-sm" aria-label={`Quantidade ${item.quantity}`}>{item.quantity}</span>
+                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity + 1)} aria-label={`Aumentar quantidade de ${item.name}`}>
+                            <Plus className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-muted-foreground">De <span className="line-through">{formatPrice(itemTotal)}</span></p>
+                          <p className="mt-0.5 text-sm font-semibold text-[color:var(--gold)]">{formatPrice(getPixPrice(itemTotal))} no Pix</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
             <div className="border-t border-border bg-surface p-5 sm:p-7">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium uppercase tracking-[0.16em]">Total</span>
-                <strong className="font-serif text-2xl">{formatPrice(total)}</strong>
+              <div className="flex items-end justify-between gap-5">
+                <div>
+                  <span className="text-xs font-medium uppercase tracking-[0.16em]">Total</span>
+                  <p className="mt-1 text-xs text-muted-foreground">De <span className="line-through">{formatPrice(total)}</span></p>
+                </div>
+                <div className="text-right">
+                  <strong className="font-serif text-2xl text-[color:var(--gold)]">{formatPrice(getPixPrice(total))}</strong>
+                  <p className="text-xs text-muted-foreground">no Pix • {PIX_DISCOUNT_PERCENT}% off</p>
+                </div>
               </div>
               <Button size="lg" className="mt-5 w-full" onClick={checkout}>Finalizar pelo WhatsApp</Button>
               <p className="mt-3 text-center text-xs text-muted-foreground">Pagamento e entrega serão combinados no atendimento.</p>

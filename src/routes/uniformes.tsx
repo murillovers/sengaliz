@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Check, Building2, Shirt, Palette, Truck } from "lucide-react";
+import { products } from "@/lib/products";
 
 export const Route = createFileRoute("/uniformes")({
   head: () => ({
@@ -24,6 +25,26 @@ export const Route = createFileRoute("/uniformes")({
   component: UniformesPage,
 });
 
+const uniformLines = [
+  {
+    title: "Executiva",
+    description: "Polos, camisas e peças de apresentação para recepção, administrativo, comercial e atendimento.",
+    image: products.find((product) => product.slug === "polo-executiva-grafite")?.image,
+  },
+  {
+    title: "Térmica",
+    description: "Camadas estruturadas para equipes em ambientes frios, com foco em conforto, presença e mobilidade.",
+    image: products.find((product) => product.slug === "blazer-veludo-petroleo")?.image,
+  },
+  {
+    title: "Operacional",
+    description: "Peças resistentes para rotina intensa, visitas técnicas e equipes que precisam de mobilidade no dia a dia.",
+    image: products.find((product) => product.slug === "polo-operacional-marinho")?.image,
+  },
+];
+
+const clients = ["Relojoaria Brusa", "Balé da Margô", "Real Plast"];
+
 function UniformesPage() {
   const [sent, setSent] = useState(false);
   return (
@@ -44,6 +65,61 @@ function UniformesPage() {
             Confecção própria sob demanda. Peças administrativas, recepção, loja, equipes de evento e
             uniformes com identidade da sua marca.
           </p>
+        </div>
+      </section>
+
+      <section className="container-page py-20">
+        <div className="max-w-2xl">
+          <p className="eyebrow text-[color:var(--gold)]">Linhas de uniforme</p>
+          <h2 className="mt-3 font-serif text-4xl md:text-5xl">Uma solução para cada rotina.</h2>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Da apresentação executiva à operação diária, a modelagem é pensada para unir identidade visual, conforto e repetibilidade de produção.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {uniformLines.map((line) => (
+            <article key={line.title} className="group overflow-hidden border border-border bg-card">
+              <div className="relative aspect-[4/5] overflow-hidden bg-black">
+                {line.image ? (
+                  <img
+                    src={line.image}
+                    alt={`Linha de uniforme ${line.title}`}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  />
+                ) : null}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+                  <p className="eyebrow text-[color:var(--gold)]">Linha</p>
+                  <h3 className="mt-2 font-serif text-3xl">{line.title}</h3>
+                </div>
+              </div>
+              <p className="p-6 text-sm leading-relaxed text-muted-foreground">{line.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-[color:var(--muted)] py-16">
+        <div className="container-page">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="eyebrow text-[color:var(--gold)]">Cases</p>
+              <h2 className="mt-3 font-serif text-4xl">Empresas e projetos que já vestiram Sengaliz.</h2>
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Alguns dos clientes já atendidos em projetos de uniformização e peças corporativas.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {clients.map((client) => (
+                <div key={client} className="flex min-h-32 items-end border border-[color:var(--gold)]/35 bg-background p-5">
+                  <div>
+                    <Building2 className="h-5 w-5 text-[color:var(--gold)]" />
+                    <p className="mt-5 font-serif text-xl">{client}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

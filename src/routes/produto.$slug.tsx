@@ -1,7 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Heart, ShieldCheck, Truck, Ruler } from "lucide-react";
+import { Heart, ShieldCheck, Truck } from "lucide-react";
 import { products, formatPrice, type Product } from "@/lib/products";
+import { getInstallmentPrice, getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 import { ProductCard } from "@/components/product-card";
+import { SizeGuideModal } from "@/components/size-guide-modal";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useCart } from "@/components/cart-context";
@@ -95,10 +97,24 @@ function ProductPage() {
           <p className="eyebrow text-[color:var(--gold)]">{product.line ?? "Criação Sengaliz"}</p>
           <h1 className="mt-3 font-serif text-4xl md:text-5xl">{product.name}</h1>
           <p className="mt-2 text-sm text-muted-foreground">Ideal para: {product.occasion}</p>
-          <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">
-            {product.priceOnRequest ? "Sob consulta" : formatPrice(product.price)}
-          </p>
-          {!product.priceOnRequest && <p className="mt-1 text-xs text-muted-foreground">Em até 6x sem juros no cartão</p>}
+
+          {product.priceOnRequest ? (
+            <p className="mt-6 font-serif text-3xl text-[color:var(--gold)]">Sob consulta</p>
+          ) : (
+            <div className="mt-6">
+              <p className="text-sm text-muted-foreground">
+                De <span className="line-through">{formatPrice(product.price)}</span>
+              </p>
+              <p className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="font-serif text-3xl text-[color:var(--gold)]">{formatPrice(getPixPrice(product.price))}</span>
+                <span className="text-sm font-medium">no Pix</span>
+              </p>
+              <p className="mt-1 text-xs font-medium text-[color:var(--gold)]">{PIX_DISCOUNT_PERCENT}% de desconto no pagamento via Pix</p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Ou em até 6x de {formatPrice(getInstallmentPrice(product.price))} sem juros no cartão
+              </p>
+            </div>
+          )}
 
           {product.priceOnRequest ? (
             <div className="mt-8">
@@ -135,9 +151,13 @@ function ProductPage() {
                     Selecione um tamanho para adicionar à sacola.
                   </p>
                 )}
-                <button className="mt-3 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
-                  <Ruler className="h-3.5 w-3.5" /> Guia de tamanhos
-                </button>
+                <SizeGuideModal
+                  product={product}
+                  onSelectSize={(size) => {
+                    setSelectedSize(size);
+                    setSizeError(false);
+                  }}
+                />
               </div>
 
               <div className="mt-8 flex gap-3">

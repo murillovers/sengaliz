@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { formatPrice, type Product } from "@/lib/products";
+import { getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -41,11 +42,21 @@ export function ProductCard({ product }: { product: Product }) {
           {product.line ?? product.occasion}
         </span>
       </div>
-      <div className="flex min-h-32 flex-col gap-2 p-4">
+      <div className="flex min-h-36 flex-col gap-2 p-4">
         <h3 className="text-base font-semibold leading-tight">{product.name}</h3>
-        <p className="mt-auto text-sm font-semibold text-foreground">
-          {product.priceOnRequest ? "Sob consulta" : formatPrice(product.price)}
-        </p>
+        {product.priceOnRequest ? (
+          <p className="mt-auto text-sm font-semibold text-foreground">Sob consulta</p>
+        ) : (
+          <div className="mt-auto">
+            <p className="text-xs text-muted-foreground">
+              De <span className="line-through">{formatPrice(product.price)}</span>
+            </p>
+            <p className="mt-0.5 text-base font-semibold text-[color:var(--gold)]">
+              {formatPrice(getPixPrice(product.price))} <span className="text-xs font-medium">no Pix</span>
+            </p>
+            <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{PIX_DISCOUNT_PERCENT}% de desconto</p>
+          </div>
+        )}
       </div>
     </Link>
   );
