@@ -7,7 +7,7 @@ export function ProductCard({ product }: { product: Product }) {
     <Link
       to="/produto/$slug"
       params={{ slug: product.slug }}
-      className="group block border border-border bg-card transition-all duration-300 hover:border-gold hover:shadow-card"
+      className="group block border border-border bg-card text-card-foreground transition-all duration-300 hover:border-gold hover:shadow-card"
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         {product.imagePosition ? (
