@@ -20,68 +20,70 @@ export function SiteHeader() {
   const { itemCount, openCart } = useCart();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-      <div className="bg-graphite text-gold">
-        <div className="container-page flex h-8 items-center justify-center text-center text-[10px] font-medium uppercase tracking-[0.2em]">
-          Peças sob medida · Atendimento VIP · Envio para todo o Brasil
+    <>
+      <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
+        <div className="bg-graphite text-gold">
+          <div className="container-page flex h-8 items-center justify-center text-center text-[10px] font-medium uppercase tracking-[0.2em]">
+            Peças sob medida · Atendimento VIP · Envio para todo o Brasil
+          </div>
         </div>
-      </div>
-      <div className="container-page grid h-20 grid-cols-[44px_1fr_auto] items-center gap-3 lg:grid-cols-[1fr_auto_1fr]">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden"
-          onClick={() => setOpen(true)}
-          aria-label="Abrir menu"
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
-
-        <Button
-          type="button"
-          variant="ghost"
-          onClick={() => setSearchOpen((value) => !value)}
-          className="hidden min-h-11 max-w-xs items-center gap-3 border-b border-border text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-gold hover:text-foreground lg:flex"
-          aria-expanded={searchOpen}
-        >
-          <Search className="h-4 w-4" /> Buscar produtos
-        </Button>
-
-        <Link to="/" className="flex justify-center">
-          <img src={logo.url} alt="Sengaliz — Estúdio de costura" className="h-12 w-auto max-w-[220px] object-contain md:h-14 md:max-w-[300px]" />
-        </Link>
-
-        <div className="flex items-center justify-end gap-1 text-foreground">
-          <Button variant="ghost" size="icon" aria-label="Buscar" className="lg:hidden" onClick={() => setSearchOpen((value) => !value)}>
-            <Search className="h-5 w-5" />
+        <div className="container-page grid h-20 grid-cols-[44px_1fr_auto] items-center gap-3 lg:grid-cols-[1fr_auto_1fr]">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setOpen(true)}
+            aria-label="Abrir menu"
+          >
+            <Menu className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" aria-label="Favoritos" className="hidden sm:inline-flex">
-            <Heart className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon" aria-label={`Sacola com ${itemCount} ${itemCount === 1 ? "item" : "itens"}`} className="relative" onClick={openCart}>
-            <ShoppingBag className="h-5 w-5" />
-            <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-[9px] font-medium text-graphite">
-              {itemCount > 99 ? "99+" : itemCount}
-            </span>
-          </Button>
-        </div>
-      </div>
 
-      {searchOpen && (
-        <div className="border-t border-border bg-surface">
-          <form className="container-page flex py-3" onSubmit={(event) => event.preventDefault()}>
-            <label className="sr-only" htmlFor="market-search">Buscar produtos</label>
-            <input id="market-search" autoFocus placeholder="Busque produtos Sengaliz" className="h-11 flex-1 border border-border bg-background px-4 text-sm outline-none focus:border-gold" />
-            <Button type="submit" aria-label="Executar busca"><Search className="h-4 w-4" /> Buscar</Button>
-          </form>
-        </div>
-      )}
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => setSearchOpen((value) => !value)}
+            className="hidden min-h-11 max-w-xs items-center gap-3 border-b border-border text-left text-[11px] uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:border-gold hover:text-foreground lg:flex"
+            aria-expanded={searchOpen}
+          >
+            <Search className="h-4 w-4" /> Buscar produtos
+          </Button>
 
-      <nav className="hidden border-t border-border lg:block">
-        <div className="container-page flex h-12 items-center justify-center gap-8">
-          {nav.map((item) => <Link key={item.to} to={item.to} className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-gold" activeProps={{ className: "text-gold" }}>{item.label}</Link>)}
+          <Link to="/" className="flex justify-center">
+            <img src={logo.url} alt="Sengaliz — Estúdio de costura" className="h-12 w-auto max-w-[220px] object-contain md:h-14 md:max-w-[300px]" />
+          </Link>
+
+          <div className="flex items-center justify-end gap-1 text-foreground">
+            <Button variant="ghost" size="icon" aria-label="Buscar" className="lg:hidden" onClick={() => setSearchOpen((value) => !value)}>
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" aria-label="Favoritos" className="hidden sm:inline-flex">
+              <Heart className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon" aria-label={`Sacola com ${itemCount} ${itemCount === 1 ? "item" : "itens"}`} className="relative" onClick={openCart}>
+              <ShoppingBag className="h-5 w-5" />
+              <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-gold text-[9px] font-medium text-graphite">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            </Button>
+          </div>
         </div>
-      </nav>
+
+        {searchOpen && (
+          <div className="border-t border-border bg-surface">
+            <form className="container-page flex py-3" onSubmit={(event) => event.preventDefault()}>
+              <label className="sr-only" htmlFor="market-search">Buscar produtos</label>
+              <input id="market-search" autoFocus placeholder="Busque produtos Sengaliz" className="h-11 flex-1 border border-border bg-background px-4 text-sm outline-none focus:border-gold" />
+              <Button type="submit" aria-label="Executar busca"><Search className="h-4 w-4" /> Buscar</Button>
+            </form>
+          </div>
+        )}
+
+        <nav className="hidden border-t border-border lg:block">
+          <div className="container-page flex h-12 items-center justify-center gap-8">
+            {nav.map((item) => <Link key={item.to} to={item.to} className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-gold" activeProps={{ className: "text-gold" }}>{item.label}</Link>)}
+          </div>
+        </nav>
+      </header>
 
       {open && (
         <div className="fixed inset-0 z-50 bg-graphite lg:hidden">
@@ -122,6 +124,6 @@ export function SiteHeader() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
