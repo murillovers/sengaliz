@@ -93,7 +93,7 @@ export function CartDrawer() {
                         </div>
                         <div className="text-right">
                           <p className="text-xs text-muted-foreground">De <span className="line-through">{formatPrice(itemTotal)}</span></p>
-                          <p className="mt-0.5 text-sm font-semibold text-[color:var(--gold)]">{formatPrice(getPixPrice(itemTotal))} no Pix</p>
+                          <p className="mt-0.5 text-sm font-semibold text-[color:var(--gold)]">Por {formatPrice(getPixPrice(itemTotal))} no Pix</p>
                         </div>
                       </div>
                     </div>
@@ -108,7 +108,7 @@ export function CartDrawer() {
                   <p className="mt-1 text-xs text-muted-foreground">De <span className="line-through">{formatPrice(total)}</span></p>
                 </div>
                 <div className="text-right">
-                  <strong className="font-serif text-2xl text-[color:var(--gold)]">{formatPrice(getPixPrice(total))}</strong>
+                  <strong className="font-serif text-2xl text-[color:var(--gold)]">Por {formatPrice(getPixPrice(total))}</strong>
                   <p className="text-xs text-muted-foreground">no Pix • {PIX_DISCOUNT_PERCENT}% off</p>
                 </div>
               </div>

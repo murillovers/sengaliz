@@ -106,6 +106,7 @@ function ProductPage() {
                 De <span className="line-through">{formatPrice(product.price)}</span>
               </p>
               <p className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                <span className="text-sm text-muted-foreground">Por</span>
                 <span className="font-serif text-3xl text-[color:var(--gold)]">{formatPrice(getPixPrice(product.price))}</span>
                 <span className="text-sm font-medium">no Pix</span>
               </p>

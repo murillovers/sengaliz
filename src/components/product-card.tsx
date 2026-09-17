@@ -52,7 +52,7 @@ export function ProductCard({ product }: { product: Product }) {
               De <span className="line-through">{formatPrice(product.price)}</span>
             </p>
             <p className="mt-0.5 text-base font-semibold text-[color:var(--gold)]">
-              {formatPrice(getPixPrice(product.price))} <span className="text-xs font-medium">no Pix</span>
+              Por {formatPrice(getPixPrice(product.price))} <span className="text-xs font-medium">no Pix</span>
             </p>
             <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{PIX_DISCOUNT_PERCENT}% de desconto</p>
           </div>
