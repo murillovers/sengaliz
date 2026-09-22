@@ -24,7 +24,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "sengaliz-consultora-chat-v1";
-const consultoraEmblem = "/branding/consultora-sengaliz-emblema.png";
+const lizEmblem = "/branding/liz-sengaliz-emblema.webp";
 
 const suggestions = [
   "Look para casamento à noite",
@@ -144,13 +144,13 @@ export function ConsultoraFab() {
         <section
           role="dialog"
           aria-modal="false"
-          aria-label="Consultora Sengaliz"
+          aria-label="Liz — consultora online da Sengaliz"
           className="fixed bottom-40 right-4 z-[60] flex h-[520px] max-h-[calc(100vh-11rem)] w-[calc(100vw-2rem)] max-w-[390px] flex-col overflow-hidden border border-[color:var(--gold)]/35 bg-background shadow-modal sm:right-6"
         >
           <header className="flex items-center justify-between gap-3 border-b border-white/10 bg-graphite px-4 py-3 text-white">
             <div className="flex min-w-0 items-center gap-3">
               <img
-                src={consultoraEmblem}
+                src={lizEmblem}
                 alt=""
                 aria-hidden="true"
                 className="h-9 w-9 flex-none object-contain"
@@ -279,7 +279,7 @@ export function ConsultoraFab() {
               <PromptInputFooter>
                 <PromptInputTools>
                   <span className="px-1 text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
-                    Catálogo Sengaliz
+                    Atendimento virtual Sengaliz
                   </span>
                 </PromptInputTools>
                 <PromptInputSubmit
@@ -297,16 +297,22 @@ export function ConsultoraFab() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-label={open ? "Fechar Consultora Sengaliz" : "Abrir Consultora Sengaliz"}
+        aria-label={open ? "Fechar conversa com a Liz" : "Conversar com a Liz"}
         aria-expanded={open}
         className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-graphite shadow-modal ring-1 ring-[color:var(--gold)]/45 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
       >
-        <img
-          src={consultoraEmblem}
-          alt=""
-          aria-hidden="true"
-          className="h-11 w-11 object-contain"
-        />
+        <span className="relative flex h-11 w-11 items-center justify-center">
+          <img
+            src={lizEmblem}
+            alt=""
+            aria-hidden="true"
+            className="h-11 w-11 object-contain"
+          />
+          <span
+            className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-graphite bg-emerald-400"
+            aria-hidden="true"
+          />
+        </span>
       </button>
     </>
   );

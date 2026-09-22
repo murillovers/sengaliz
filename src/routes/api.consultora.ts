@@ -77,7 +77,7 @@ function publicAiError(error: unknown) {
   const message = error instanceof Error ? error.message.toLowerCase() : String(error).toLowerCase();
 
   if (message.includes("402") || message.includes("credit") || message.includes("payment")) {
-    return "A consultora está temporariamente indisponível por limite de créditos. Tente novamente mais tarde.";
+    return "A Liz está temporariamente indisponível. Tente novamente mais tarde.";
   }
 
   if (message.includes("429") || message.includes("rate") || message.includes("limit")) {
@@ -94,7 +94,7 @@ export const Route = createFileRoute("/api/consultora")({
         const apiKey = process.env["LOVABLE_API_KEY"];
 
         if (!apiKey) {
-          return new Response("A IA da Sengaliz ainda não está habilitada neste ambiente.", {
+          return new Response("A Liz ainda não está disponível neste ambiente.", {
             status: 503,
             headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
           });
@@ -121,7 +121,7 @@ export const Route = createFileRoute("/api/consultora")({
 
         const messages = sanitizeMessages(body.messages);
         if (!messages.length || messages.at(-1)?.role !== "user") {
-          return new Response("Envie uma pergunta para a Consultora Sengaliz.", { status: 400 });
+          return new Response("Envie uma pergunta para a Liz.", { status: 400 });
         }
 
         try {
@@ -150,7 +150,7 @@ export const Route = createFileRoute("/api/consultora")({
             onError: publicAiError,
           });
         } catch (error) {
-          console.error("[Consultora Sengaliz]", error);
+          console.error("[Liz Sengaliz]", error);
           return new Response(publicAiError(error), {
             status: 502,
             headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
