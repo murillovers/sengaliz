@@ -4,7 +4,6 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { RotateCcw, Sparkles, Trash2, X } from "lucide-react";
-import emblem from "@/assets/sengaliz-emblema-transparente.png.asset.json";
 import {
   Conversation,
   ConversationContent,
@@ -25,6 +24,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "sengaliz-consultora-chat-v1";
+const consultoraEmblem = "/branding/consultora-sengaliz-emblema.png";
 
 const suggestions = [
   "Look para casamento à noite",
@@ -149,19 +149,11 @@ export function ConsultoraFab() {
         >
           <header className="flex items-center justify-between gap-3 border-b border-white/10 bg-graphite px-4 py-3 text-white">
             <div className="flex min-w-0 items-center gap-3">
-              <span
+              <img
+                src={consultoraEmblem}
+                alt=""
                 aria-hidden="true"
-                className="h-8 w-8 flex-none bg-[color:var(--gold)]"
-                style={{
-                  WebkitMaskImage: `url(${emblem.url})`,
-                  maskImage: `url(${emblem.url})`,
-                  WebkitMaskRepeat: "no-repeat",
-                  maskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
-                  maskPosition: "center",
-                  WebkitMaskSize: "contain",
-                  maskSize: "contain",
-                }}
+                className="h-9 w-9 flex-none object-contain"
               />
               <div className="min-w-0">
                 <p className="truncate font-serif text-lg leading-none">Consultora Sengaliz</p>
@@ -309,19 +301,11 @@ export function ConsultoraFab() {
         aria-expanded={open}
         className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-graphite shadow-modal ring-1 ring-[color:var(--gold)]/45 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
       >
-        <span
+        <img
+          src={consultoraEmblem}
+          alt=""
           aria-hidden="true"
-          className="h-8 w-8 bg-[color:var(--gold)]"
-          style={{
-            WebkitMaskImage: `url(${emblem.url})`,
-            maskImage: `url(${emblem.url})`,
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat",
-            WebkitMaskPosition: "center",
-            maskPosition: "center",
-            WebkitMaskSize: "contain",
-            maskSize: "contain",
-          }}
+          className="h-11 w-11 object-contain"
         />
       </button>
     </>
