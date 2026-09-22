@@ -24,7 +24,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 
 const STORAGE_KEY = "sengaliz-consultora-chat-v1";
-const lizEmblem = "/branding/liz-sengaliz-emblema.webp";
+const lizEmblem = "/branding/liz-sengaliz-button.png";
 
 const suggestions = [
   "Tenho um casamento à noite",
@@ -153,7 +153,7 @@ export function ConsultoraFab() {
                 src={lizEmblem}
                 alt=""
                 aria-hidden="true"
-                className="h-9 w-9 flex-none object-contain"
+                className="h-9 w-9 flex-none rounded-full object-cover"
               />
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
@@ -302,20 +302,14 @@ export function ConsultoraFab() {
         onClick={() => setOpen((value) => !value)}
         aria-label={open ? "Fechar conversa com a Liz" : "Conversar com a Liz"}
         aria-expanded={open}
-        className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-graphite shadow-modal ring-1 ring-[color:var(--gold)]/45 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
+        className="fixed bottom-24 right-6 z-50 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-gold-gradient text-graphite shadow-modal transition-transform hover:scale-105"
       >
-        <span className="relative flex h-11 w-11 items-center justify-center">
-          <img
-            src={lizEmblem}
-            alt=""
-            aria-hidden="true"
-            className="h-11 w-11 object-contain"
-          />
-          <span
-            className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-graphite bg-emerald-400"
-            aria-hidden="true"
-          />
-        </span>
+        <img
+          src={lizEmblem}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover"
+        />
       </button>
     </>
   );
