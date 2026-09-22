@@ -12,6 +12,7 @@ const nav = [
   { to: "/feminino", label: "Feminino" },
   { to: "/masculino", label: "Masculino" },
   { to: "/uniformes", label: "Uniformes" },
+  { to: "/consultora", label: "Consultora IA" },
 ];
 
 export function SiteHeader() {
