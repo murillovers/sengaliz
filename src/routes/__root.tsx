@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
+import { ConsultoraFab } from "@/components/consultora-fab";
 import { Button } from "@/components/ui/button";
 import { CartProvider } from "@/components/cart-context";
 import { CartDrawer } from "@/components/cart-drawer";
@@ -129,6 +130,7 @@ function RootComponent() {
             <Outlet />
           </main>
           <SiteFooter />
+          <ConsultoraFab />
           <WhatsAppFab />
           <CartDrawer />
         </div>
