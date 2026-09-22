@@ -27,9 +27,9 @@ const STORAGE_KEY = "sengaliz-consultora-chat-v1";
 const lizEmblem = "/branding/liz-sengaliz-emblema.webp";
 
 const suggestions = [
-  "Look para casamento à noite",
-  "Smoking Noir ou Terno Obsidiana?",
-  "Sugestão para evento corporativo",
+  "Tenho um casamento à noite",
+  "Estou em dúvida entre dois ternos",
+  "Quero montar um look executivo",
 ];
 
 function messageText(message: UIMessage) {
@@ -156,8 +156,11 @@ export function ConsultoraFab() {
                 className="h-9 w-9 flex-none object-contain"
               />
               <div className="min-w-0">
-                <p className="truncate font-serif text-lg leading-none">Consultora Sengaliz</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/50">IA do catálogo</p>
+                <div className="flex items-center gap-2">
+                  <p className="truncate font-serif text-lg leading-none">Liz</p>
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_0_3px_rgba(52,211,153,0.12)]" aria-hidden="true" />
+                </div>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.16em] text-white/50">Consultora online</p>
               </div>
             </div>
 
@@ -197,9 +200,9 @@ export function ConsultoraFab() {
                       <Sparkles className="h-4 w-4" />
                       <span className="text-[10px] font-medium uppercase tracking-[0.18em]">Posso te ajudar</span>
                     </div>
-                    <h2 className="mt-3 font-serif text-2xl">O que você procura?</h2>
+                    <h2 className="mt-3 font-serif text-2xl">Oi, eu sou a Liz.</h2>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      Me conte a ocasião, estilo ou peça que você tem em mente. Eu consulto o catálogo Sengaliz e te mostro as melhores opções.
+                      Sou a consultora online da Sengaliz. Me conte a ocasião, o estilo ou a peça que você procura e eu te ajudo a escolher pelo catálogo.
                     </p>
                     <div className="mt-5 space-y-2">
                       {suggestions.map((suggestion) => (
@@ -238,7 +241,7 @@ export function ConsultoraFab() {
               {status === "submitted" && (
                 <Message from="assistant">
                   <MessageContent>
-                    <Shimmer>Consultando o catálogo…</Shimmer>
+                    <Shimmer>Deixa eu ver algumas opções…</Shimmer>
                   </MessageContent>
                 </Message>
               )}
