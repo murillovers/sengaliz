@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Heart, ShieldCheck, Truck } from "lucide-react";
-import { products, formatPrice, type Product } from "@/lib/products";
+import { products, formatPrice, type Product, type ProductPhoto } from "@/lib/products";
 import { getInstallmentPrice, getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 import { ProductCard } from "@/components/product-card";
 import { SizeGuideModal } from "@/components/size-guide-modal";
@@ -56,41 +56,100 @@ export const Route = createFileRoute("/produto/$slug")({
   component: ProductPage,
 });
 
-function ProductVisual({ product, className, primary = false }: { product: Product; className: string; primary?: boolean }) {
-  if (product.imagePosition) {
+function ProductVisual({
+  product,
+  className,
+  primary = false,
+  photo,
+}: {
+  product: Product;
+  className: string;
+  primary?: boolean;
+  photo?: ProductPhoto;
+}) {
+  if (photo?.spritePosition || (!photo && product.imagePosition)) {
     return (
       <div
         role={primary ? "img" : undefined}
-        aria-label={primary ? product.name : undefined}
+        aria-label={primary ? (photo?.alt ?? product.name) : undefined}
         aria-hidden={primary ? undefined : true}
-        className={`${className} bg-muted bg-cover bg-no-repeat`}
+        className={`${className} bg-muted bg-no-repeat`}
         style={{
-          backgroundImage: `url(${product.image})`,
-          backgroundSize: "600% 300%",
-          backgroundPosition: product.imagePosition,
+          backgroundImage: `url("${photo?.src ?? product.image}")`,
+          backgroundSize: photo?.spriteSize ?? "600% 300%",
+          backgroundPosition: photo?.spritePosition ?? product.imagePosition,
         }}
       />
     );
   }
 
-  return <img src={primary ? product.image : product.hover} alt={primary ? product.name : ""} className={`${className} object-cover`} />;
+  return (
+    <img
+      src={photo?.src ?? (primary ? product.image : product.hover)}
+      alt={primary ? (photo?.alt ?? product.name) : ""}
+      className={`${className} object-cover`}
+    />
+  );
 }
 
 function ProductPage() {
   const product: Product | undefined = Route.useLoaderData();
   const [selectedSize, setSelectedSize] = useState<string>();
   const [sizeError, setSizeError] = useState(false);
+  const [colorName, setColorName] = useState<string>();
+  const [photoIndex, setPhotoIndex] = useState(0);
   const { addItem } = useCart();
   if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
+  const selectedColor = product.colors?.find((color) => color.name === colorName) ?? product.colors?.[0];
+  const photos = selectedColor?.photos ?? [];
+  const activePhoto = photos[Math.min(photoIndex, Math.max(photos.length - 1, 0))];
 
   return (
     <div>
       <section className="container-page grid gap-12 py-12 md:grid-cols-2 md:py-16">
-        <div className="grid grid-cols-2 gap-3">
-          <ProductVisual product={product} primary className="col-span-2 aspect-[3/4] w-full" />
-          <ProductVisual product={product} className="aspect-square w-full" />
-          <ProductVisual product={product} primary className="aspect-square w-full" />
+        <div>
+          {selectedColor && photos.length === 0 ? (
+            <div className="flex aspect-[3/4] flex-col items-center justify-center gap-4 bg-muted px-8 text-center">
+              <span
+                className="h-24 w-24 rounded-full border-4 border-background shadow-card"
+                style={{ backgroundColor: selectedColor.hex }}
+                aria-hidden="true"
+              />
+              <p className="font-serif text-2xl">{selectedColor.name}</p>
+              <p className="max-w-xs text-sm text-muted-foreground">
+                A fotografia desta cor ainda não está cadastrada. Confirme a tonalidade e a disponibilidade com a Sengaliz.
+              </p>
+            </div>
+          ) : (
+            <ProductVisual
+              product={product}
+              photo={activePhoto}
+              primary
+              className="aspect-[3/4] w-full bg-muted"
+            />
+          )}
+          {selectedColor && photos.length > 0 ? (
+            <div className="mt-3 grid grid-cols-5 gap-2">
+              {photos.map((photo, index) => (
+                <button
+                  key={`${selectedColor.name}-${index}`}
+                  type="button"
+                  aria-label={`Ver foto ${index + 1}: ${photo.alt}`}
+                  aria-pressed={index === photoIndex}
+                  onClick={() => setPhotoIndex(index)}
+                  className={`aspect-[3/4] overflow-hidden border-2 transition-colors ${index === photoIndex ? "border-[color:var(--gold)]" : "border-transparent hover:border-border"}`}
+                >
+                  <ProductVisual product={product} photo={photo} className="h-full w-full bg-muted" />
+                </button>
+              ))}
+            </div>
+          ) : !selectedColor ? (
+            <div className="mt-3 grid grid-cols-2 gap-3">
+              <ProductVisual product={product} className="aspect-square w-full" />
+              <ProductVisual product={product} primary className="aspect-square w-full" />
+            </div>
+          ) : null}
         </div>
 
         <div className="md:sticky md:top-28 md:h-fit">
@@ -128,6 +187,32 @@ function ProductPage() {
             </div>
           ) : (
             <>
+              {selectedColor && (
+                <fieldset className="mt-8">
+                  <legend className="eyebrow">
+                    Cor: <span className="text-foreground">{selectedColor.name}</span>
+                  </legend>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                    {product.colors?.map((color) => (
+                      <button
+                        key={color.name}
+                        type="button"
+                        aria-label={`Selecionar cor ${color.name}`}
+                        aria-pressed={selectedColor.name === color.name}
+                        title={color.name}
+                        onClick={() => {
+                          setColorName(color.name);
+                          setPhotoIndex(0);
+                        }}
+                        className={`flex h-11 w-11 items-center justify-center rounded-full border-2 p-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)] ${selectedColor.name === color.name ? "border-[color:var(--gold)]" : "border-border hover:border-[color:var(--gold)]/70"}`}
+                      >
+                        <span className="block h-full w-full rounded-full border border-black/15" style={{ backgroundColor: color.hex }} />
+                      </button>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">As fotos são exibidas somente para as cores com imagens cadastradas. Disponibilidade a confirmar.</p>
+                </fieldset>
+              )}
               <div className="mt-8">
                 <p className="eyebrow">Tamanho</p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -170,7 +255,7 @@ function ProductPage() {
                       setSizeError(true);
                       return;
                     }
-                    addItem(product, selectedSize);
+                    addItem(product, selectedSize, selectedColor?.name);
                   }}
                 >
                   Adicionar à sacola

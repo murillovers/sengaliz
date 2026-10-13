@@ -1,3 +1,17 @@
+export type ProductPhoto = {
+  src: string;
+  alt: string;
+  /** Posição de uma fotografia dentro de um sprite (sem duplicar ou inventar imagens). */
+  spritePosition?: string;
+  spriteSize?: string;
+};
+
+export type ProductColor = {
+  name: string;
+  hex: string;
+  photos: ProductPhoto[];
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -11,13 +25,27 @@ export type Product = {
   image: string;
   hover: string;
   imagePosition?: string;
+  colors?: ProductColor[];
 };
 
 const rawCatalog = "https://raw.githubusercontent.com/murillovers/sengaliz/main/public/catalog";
 
+// Cores confirmadas nas referências enviadas. Fotografias ausentes no repositório
+// não são substituídas por imagens falsas; basta preencher photos depois do upload.
+const calcaColors: ProductColor[] = [
+  {
+    name: "Bege",
+    hex: "#BEAA89",
+    photos: [{ src: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", alt: "Calça de alfaiataria bege" }],
+  },
+  { name: "Azul-marinho", hex: "#192D53", photos: [] },
+  { name: "Terracota", hex: "#BD523D", photos: [] },
+  { name: "Preto", hex: "#292A30", photos: [] },
+];
+
 export const products: Product[] = [
   { slug: "camisa-feminina-crepe", name: "Camisa Feminina Crepe Marfim", brand: "Sengaliz", price: 980, category: "feminino", occasion: "Ambientes executivos e ocasiões sociais", line: "Alfaiataria Feminina", description: "Camisa em crepe encorpado com toque macio, corte fluido e pala traseira que favorece o caimento. Gola alongada, punhos largos e fechamento com botões forrados criam um acabamento refinado para alfaiataria feminina.", image: "/catalog/Gemini_Generated_Image_nudgwanudgwanudg.jfif", hover: "/catalog/Gemini_Generated_Image_nudgwanudgwanudg.jfif" },
-  { slug: "calca-alfaiataria-cintura-alta", name: "Calça Alfaiataria Cintura Alta", brand: "Sengaliz", price: 1490, category: "feminino", occasion: "Trabalho, eventos e composições formais", line: "Alfaiataria Feminina", description: "Calça em lã fria com elastano, cintura alta anatômica e perna reta de vinco marcado. Cós interno estruturado, bolsos embutidos e barra invisível entregam acabamento sob medida para conjuntos e produções formais.", image: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", hover: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif" },
+  { slug: "calca-alfaiataria-cintura-alta", name: "Calça Alfaiataria Cintura Alta", brand: "Sengaliz", price: 1490, category: "feminino", occasion: "Trabalho, eventos e composições formais", line: "Alfaiataria Feminina", description: "Calça em lã fria com elastano, cintura alta anatômica e perna reta de vinco marcado. Cós interno estruturado, bolsos embutidos e barra invisível entregam acabamento sob medida para conjuntos e produções formais.", image: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", hover: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", colors: calcaColors },
   { slug: "conjunto-alfaiataria-nude", name: "Conjunto Alfaiataria Nude", brand: "Sengaliz", price: 2450, category: "feminino", occasion: "Corporativo", line: "Alfaiataria Feminina", image: "/catalog/Gemini_Generated_Image_lb6a42lb6a42lb6a.jfif", hover: "/catalog/Gemini_Generated_Image_lb6a42lb6a42lb6a.jfif" },
   { slug: "smoking-noir", name: "Smoking Noir Slim", brand: "Sengaliz", price: 2890, category: "alfaiataria", occasion: "Casamento", image: `${rawCatalog}/Gemini_Generated_Image_lb6a42lb6a42lb6a%20(1).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_lb6a42lb6a42lb6a%20(1).jfif` },
   { slug: "terno-obsidiana", name: "Terno Obsidiana", brand: "Sengaliz", price: 3290, category: "alfaiataria", occasion: "Casamento", image: "/catalog/Gemini_Generated_Image_38b3uw38b3uw38b3.jfif", hover: "/catalog/Gemini_Generated_Image_38b3uw38b3uw38b3.jfif" },

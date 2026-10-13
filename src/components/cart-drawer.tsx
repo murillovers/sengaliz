@@ -27,7 +27,7 @@ export function CartDrawer() {
 
   const checkout = () => {
     const lines = items.map((item) =>
-      `• ${item.name} — Tam. ${item.size} — ${item.quantity}x ${formatPrice(item.price)} = ${formatPrice(item.price * item.quantity)}`,
+      `• ${item.name}${item.color ? ` — Cor: ${item.color}` : ''} — Tam. ${item.size} — ${item.quantity}x ${formatPrice(item.price)} = ${formatPrice(item.price * item.quantity)}`,
     );
     const message = [
       "Olá, Sengaliz! Gostaria de finalizar este pedido:",
@@ -69,25 +69,50 @@ export function CartDrawer() {
               {items.map((item) => {
                 const itemTotal = item.price * item.quantity;
                 return (
-                  <article key={`${item.slug}-${item.size}`} className="grid grid-cols-[80px_1fr] gap-4 border-b border-border py-5">
-                    <img src={item.image} alt="" className="aspect-[3/4] w-20 object-cover" />
+                  <article key={`${item.slug}-${item.size}-${item.color ?? ""}`} className="grid grid-cols-[80px_1fr] gap-4 border-b border-border py-5">
+                    {item.photoPending ? (
+                      <div
+                        role="img"
+                        aria-label={`Cor ${item.color ?? "sem fotografia"}`}
+                        className="flex aspect-[3/4] w-20 items-center justify-center bg-muted"
+                      >
+                        <span
+                          className="h-10 w-10 rounded-full border-2 border-background"
+                          style={{ backgroundColor: item.imageColor }}
+                        />
+                      </div>
+                    ) : item.imagePosition ? (
+                      <div
+                        role="img"
+                        aria-label={item.name}
+                        className="aspect-[3/4] w-20 bg-muted bg-no-repeat"
+                        style={{
+                          backgroundImage: `url("${item.image}")`,
+                          backgroundSize: item.imageSize,
+                          backgroundPosition: item.imagePosition,
+                        }}
+                      />
+                    ) : (
+                      <img src={item.image} alt="" className="aspect-[3/4] w-20 object-cover" />
+                    )}
                     <div className="min-w-0">
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <h3 className="text-sm font-semibold">{item.name}</h3>
+                          {item.color && <p className="mt-1 text-xs text-muted-foreground">Cor: {item.color}</p>}
                           <p className="mt-1 text-xs text-muted-foreground">Tamanho {item.size}</p>
                         </div>
-                        <Button variant="ghost" size="icon" className="h-9 w-9 flex-none" onClick={() => removeItem(item.slug, item.size)} aria-label={`Remover ${item.name}`}>
+                        <Button variant="ghost" size="icon" className="h-9 w-9 flex-none" onClick={() => removeItem(item.slug, item.size, item.color)} aria-label={`Remover ${item.name}`}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                       <div className="mt-4 flex items-end justify-between gap-3">
                         <div className="flex h-10 items-center border border-border">
-                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity - 1)} disabled={item.quantity === 1} aria-label={`Diminuir quantidade de ${item.name}`}>
+                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity - 1, item.color)} disabled={item.quantity === 1} aria-label={`Diminuir quantidade de ${item.name}`}>
                             <Minus className="h-3.5 w-3.5" />
                           </Button>
                           <span className="w-8 text-center text-sm" aria-label={`Quantidade ${item.quantity}`}>{item.quantity}</span>
-                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity + 1)} aria-label={`Aumentar quantidade de ${item.name}`}>
+                          <Button variant="ghost" size="icon" className="h-10 w-10" onClick={() => updateQuantity(item.slug, item.size, item.quantity + 1, item.color)} aria-label={`Aumentar quantidade de ${item.name}`}>
                             <Plus className="h-3.5 w-3.5" />
                           </Button>
                         </div>
