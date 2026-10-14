@@ -31,38 +31,45 @@ function Home() {
 
   return (
     <div>
-      {/* HERO */}
-      <section className="relative isolate flex min-h-[92vh] items-end overflow-hidden bg-black text-white">
-        <img
-          src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1920&q=85"
-          alt="Camisas de alfaiataria organizadas sobre a bancada"
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
-        <div className="container-page relative z-10 pb-20 pt-32">
-          <div className="max-w-2xl">
-            <p className="eyebrow text-[color:var(--gold)]">Coleção Festas 2026</p>
-            <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
-              A peça certa <br />
-              para o seu momento.
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80">
-              Curadoria unissex de alfaiataria e looks de festa, com atendimento consultivo em Caxias do Sul
-              e envio para todo o Brasil.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to="/festa"
-                className="inline-flex min-h-11 items-center gap-3 border border-gold bg-gold-gradient px-8 text-[11px] font-medium uppercase tracking-[0.2em] text-graphite shadow-card transition-all hover:brightness-105"
-              >
-                Ver coleção <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/styling"
-                className="inline-flex items-center gap-3 border border-white/60 px-8 py-4 text-xs uppercase tracking-[0.28em] text-white transition-colors hover:border-[color:var(--gold)] hover:text-[color:var(--gold)]"
-              >
-                Agende seu styling
-              </Link>
+      {/* HERO — fotografia editorial Sengaliz; desktop à direita, mobile preserva o vestido */}
+      <section className="relative isolate overflow-hidden bg-black text-white">
+        <div className="relative min-h-[740px] md:min-h-[690px] lg:min-h-[780px]">
+          <div className="absolute inset-x-0 top-0 h-[74%] md:inset-y-0 md:left-[40%] md:right-0 md:h-full">
+            <img
+              src="/images/hero-vestido-azul.avif"
+              alt="Vestido de festa azul-marinho com saia volumosa e detalhes brilhantes, em uma celebração especial"
+              className="h-full w-full object-contain object-top md:object-center"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent md:bg-gradient-to-r md:from-black md:via-black/95 md:to-black/10" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_15%,rgba(217,183,109,0.10),transparent_40%)]" />
+
+          <div className="container-page relative z-10 flex min-h-[740px] items-end pb-14 pt-32 md:min-h-[690px] md:items-center md:pb-20 lg:min-h-[780px]">
+            <div className="max-w-[38rem]">
+              <p className="eyebrow text-[color:var(--gold)]">Sengaliz · Moda Festa</p>
+              <div className="mt-5 h-px w-14 bg-[color:var(--gold)]/75" aria-hidden="true" />
+              <h1 className="mt-6 max-w-xl font-serif text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.12] md:text-[clamp(3.2rem,5vw,5.2rem)]">
+                Cada momento merece um vestido à altura.
+              </h1>
+              <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
+                Elegância, personalidade e detalhes que transformam ocasiões especiais em memórias inesquecíveis.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3 sm:gap-4">
+                <Link
+                  to="/festa"
+                  className="inline-flex min-h-12 items-center justify-center gap-3 border border-gold bg-gold-gradient px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-graphite shadow-card transition-all hover:brightness-105 sm:px-8"
+                >
+                  Ver coleção <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/styling"
+                  className="inline-flex min-h-12 items-center justify-center gap-3 border border-white/60 px-6 text-[11px] font-medium uppercase tracking-[0.18em] text-white transition-colors hover:border-[color:var(--gold)] hover:text-[color:var(--gold)] sm:px-8"
+                >
+                  Agende seu styling
+                </Link>
+              </div>
             </div>
           </div>
         </div>
