@@ -30,31 +30,44 @@ export type Product = {
 
 const rawCatalog = "https://raw.githubusercontent.com/murillovers/sengaliz/main/public/catalog";
 
-// Cores confirmadas nas referências enviadas. Fotografias ausentes no repositório
-// não são substituídas por imagens falsas; basta preencher photos depois do upload.
+// Fotografias reais de cada variação. Preto é a cor padrão da calça.
 const calcaColors: ProductColor[] = [
+  {
+    name: "Preto",
+    hex: "#25242A",
+    photos: [
+      { src: "/catalog/calca-preta-frente.webp", alt: "Calça de alfaiataria preta — vista frontal" },
+      { src: "/catalog/calca-preta-lateral.webp", alt: "Calça de alfaiataria preta — vista lateral" },
+      { src: "/catalog/calca-preta-costas.webp", alt: "Calça de alfaiataria preta — vista traseira" },
+    ],
+  },
+  {
+    name: "Azul-marinho",
+    hex: "#192D53",
+    photos: [
+      { src: "/catalog/calca-azul-marinho-frente.webp", alt: "Calça de alfaiataria azul-marinho — vista frontal" },
+      { src: "/catalog/calca-azul-marinho-lateral.webp", alt: "Calça de alfaiataria azul-marinho — vista lateral" },
+      { src: "/catalog/calca-azul-marinho-costas.webp", alt: "Calça de alfaiataria azul-marinho — vista traseira" },
+    ],
+  },
   {
     name: "Bege",
     hex: "#BEAA89",
-    photos: [{ src: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", alt: "Calça de alfaiataria bege" }],
+    photos: [
+      { src: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", alt: "Calça de alfaiataria bege" },
+    ],
   },
-  { name: "Azul-marinho", hex: "#192D53", photos: [] },
-  { name: "Terracota", hex: "#BD523D", photos: [] },
-  { name: "Preto", hex: "#292A30", photos: [] },
 ];
 
 export const products: Product[] = [
   { slug: "camisa-feminina-crepe", name: "Camisa Feminina Crepe Marfim", brand: "Sengaliz", price: 980, category: "feminino", occasion: "Ambientes executivos e ocasiões sociais", line: "Alfaiataria Feminina", description: "Camisa em crepe encorpado com toque macio, corte fluido e pala traseira que favorece o caimento. Gola alongada, punhos largos e fechamento com botões forrados criam um acabamento refinado para alfaiataria feminina.", image: "/catalog/Gemini_Generated_Image_nudgwanudgwanudg.jfif", hover: "/catalog/Gemini_Generated_Image_nudgwanudgwanudg.jfif" },
-  { slug: "calca-alfaiataria-cintura-alta", name: "Calça Alfaiataria Cintura Alta", brand: "Sengaliz", price: 1490, category: "feminino", occasion: "Trabalho, eventos e composições formais", line: "Alfaiataria Feminina", description: "Calça em lã fria com elastano, cintura alta anatômica e perna reta de vinco marcado. Cós interno estruturado, bolsos embutidos e barra invisível entregam acabamento sob medida para conjuntos e produções formais.", image: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", hover: "/catalog/Gemini_Generated_Image_c96r6cc96r6cc96r.jfif", colors: calcaColors },
+  { slug: "calca-alfaiataria-cintura-alta", name: "Calça Alfaiataria Cintura Alta", brand: "Sengaliz", price: 1490, category: "feminino", occasion: "Trabalho, eventos e composições formais", line: "Alfaiataria Feminina", description: "Calça em lã fria com elastano, cintura alta anatômica e perna reta de vinco marcado. Cós interno estruturado, bolsos embutidos e barra invisível entregam acabamento sob medida para conjuntos e produções formais.", image: "/catalog/calca-preta-frente.webp", hover: "/catalog/calca-preta-lateral.webp", colors: calcaColors },
   { slug: "conjunto-alfaiataria-nude", name: "Conjunto Alfaiataria Nude", brand: "Sengaliz", price: 2450, category: "feminino", occasion: "Corporativo", line: "Alfaiataria Feminina", image: "/catalog/Gemini_Generated_Image_lb6a42lb6a42lb6a.jfif", hover: "/catalog/Gemini_Generated_Image_lb6a42lb6a42lb6a.jfif" },
-  { slug: "smoking-noir", name: "Smoking Noir Slim", brand: "Sengaliz", price: 2890, category: "alfaiataria", occasion: "Casamento", image: `${rawCatalog}/Gemini_Generated_Image_lb6a42lb6a42lb6a%20(1).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_lb6a42lb6a42lb6a%20(1).jfif` },
-  { slug: "terno-obsidiana", name: "Terno Obsidiana", brand: "Sengaliz", price: 3290, category: "alfaiataria", occasion: "Casamento", image: "/catalog/Gemini_Generated_Image_38b3uw38b3uw38b3.jfif", hover: "/catalog/Gemini_Generated_Image_38b3uw38b3uw38b3.jfif" },
   { slug: "colete-alfaiataria-grafite", name: "Colete Alfaiataria Grafite", brand: "Sengaliz", price: 790, category: "alfaiataria", occasion: "Alfaiataria e eventos formais", description: "Grafite fosco, botões forrados no mesmo tecido e ajuste traseiro por fivela. Construído com o mesmo cuidado de entretela dos paletós da linha, funciona por baixo de um paletó ou isolado sobre a camisa.", image: `${rawCatalog}/ChatGPT%20Image%2016%20de%20set.%20de%202026%2C%2017_32_22.png`, hover: `${rawCatalog}/ChatGPT%20Image%2016%20de%20set.%20de%202026%2C%2017_32_22.png` },
   { slug: "vestido-dourado-lume", name: "Vestido Longo Lume", brand: "Sengaliz", price: 3450, category: "festa", occasion: "Formatura", image: "/catalog/Gemini_Generated_Image_1edrmf1edrmf1edr.jfif", hover: "/catalog/Gemini_Generated_Image_1edrmf1edrmf1edr.jfif" },
   { slug: "vestido-veludo-bordo", name: "Vestido Veludo Bordô", brand: "Sengaliz", price: 2790, category: "festa", occasion: "Réveillon", image: "/catalog/Gemini_Generated_Image_r78zjr78zjr78zjr.jfif", hover: "/catalog/Gemini_Generated_Image_r78zjr78zjr78zjr.jfif" },
   { slug: "vestido-metalico", name: "Vestido Metálico Astrée", brand: "Sengaliz", price: 3990, category: "festa", occasion: "Gala", image: "/catalog/Gemini_Generated_Image_qx9rl2qx9rl2qx9r.jfif", hover: "/catalog/Gemini_Generated_Image_qx9rl2qx9rl2qx9r.jfif" },
   { slug: "camisa-seda-perola", name: "Camisa Seda Pérola", brand: "Sengaliz", price: 890, category: "masculino", occasion: "Festa", image: `${rawCatalog}/Gemini_Generated_Image_qx9rl2qx9rl2qx9r%20(1).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_qx9rl2qx9rl2qx9r%20(1).jfif` },
-  { slug: "blazer-veludo-petroleo", name: "Blazer Veludo Petróleo", brand: "Sengaliz", price: 1890, category: "masculino", occasion: "Casamentos e eventos noturnos", description: "Veludo azul-petróleo com lapela em cetim, corte slim, dois botões e ombro levemente estruturado. Uma alternativa ao preto tradicional para eventos noturnos.", image: `${rawCatalog}/Gemini_Generated_Image_qx9rl2qx9rl2qx9r%20(2).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_qx9rl2qx9rl2qx9r%20(2).jfif` },
   { slug: "colete-laco-seda-champagne", name: "Colete e Laço Seda Champagne", brand: "Sengaliz", price: 890, category: "masculino", occasion: "Gala e eventos formais", description: "Colete e laço em seda champagne, do mesmo corte de tecido para garantir tom idêntico entre as peças. Ajuste traseiro por fivela e laço pré-amarrado com fecho ajustável.", image: "/catalog/Gemini_Generated_Image_kmaan8kmaan8kmaa.jfif", hover: "/catalog/Gemini_Generated_Image_kmaan8kmaan8kmaa.jfif" },
   { slug: "polo-executiva-grafite", name: "Polo Executiva Grafite", brand: "Sengaliz", price: 590, category: "masculino", occasion: "Rotina executiva e reuniões informais", line: "Executiva", description: "Polo em piquê premium de algodão com elastano, corte reto estruturado e gola entretelada. Acabamento com vista reforçada, botões foscos e costuras internas limpas para o escritório e compromissos profissionais.", image: "/catalog/Gemini_Generated_Image_8i478f8i478f8i47.jfif", hover: "/catalog/Gemini_Generated_Image_8i478f8i478f8i47.jfif" },
   { slug: "polo-executiva-perola", name: "Polo Executiva Pérola", brand: "Sengaliz", price: 620, category: "feminino", occasion: "Escritório, viagens e atendimento ao cliente", line: "Executiva", description: "Polo em malha dupla de algodão penteado, modelagem levemente acinturada e manga com proporção alongada. Gola firme, bainha rebatida e acabamento interno em viés asseguram presença profissional com conforto prolongado.", image: `${rawCatalog}/Gemini_Generated_Image_8i478f8i478f8i47%20(1).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_8i478f8i478f8i47%20(1).jfif` },

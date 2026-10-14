@@ -140,3 +140,18 @@
 @utility bg-gold-subtle { background-image: var(--gradient-gold-subtle); }
 @utility shadow-card { box-shadow: var(--shadow-card); }
 @utility shadow-modal { box-shadow: var(--shadow-modal); }
+
+
+/* Recorte editorial: a fotografia se funde com o fundo sem cortar o vestido. */
+.sengaliz-hero-portrait {
+  filter: contrast(1.11) saturate(1.09) brightness(0.92);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .sengaliz-hero-portrait {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 80%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 22%, #000 80%, transparent 100%);
+  }
+}

@@ -34,7 +34,7 @@ const uniformLines = [
   {
     title: "Térmica",
     description: "Camadas estruturadas para equipes em ambientes frios, com foco em conforto, presença e mobilidade.",
-    image: products.find((product) => product.slug === "blazer-veludo-petroleo")?.image,
+    image: products.find((product) => product.slug === "colete-alfaiataria-grafite")?.image,
   },
   {
     title: "Operacional",

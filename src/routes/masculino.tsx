@@ -5,6 +5,6 @@ export const Route = createCategoryRoute("/masculino", {
   eyebrow: "Curadoria",
   description:
     "Camisaria, alfaiataria e peças de festa para o homem que valoriza tecido, corte e proporção.",
-  hero: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=1920&q=80",
+  hero: "/catalog/Gemini_Generated_Image_q31j89q31j89q31j.jfif",
   filter: "masculino",
 });

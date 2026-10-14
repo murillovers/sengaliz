@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Heart, ShieldCheck, Truck } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, ShieldCheck, Truck } from "lucide-react";
 import { products, formatPrice, type Product, type ProductPhoto } from "@/lib/products";
 import { getInstallmentPrice, getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 import { ProductCard } from "@/components/product-card";
 import { SizeGuideModal } from "@/components/size-guide-modal";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useCart } from "@/components/cart-context";
 
 export const Route = createFileRoute("/produto/$slug")({
@@ -98,12 +98,18 @@ function ProductPage() {
   const [sizeError, setSizeError] = useState(false);
   const [colorName, setColorName] = useState<string>();
   const [photoIndex, setPhotoIndex] = useState(0);
+  const lastWheelTime = useRef(0);
+  const touchStartX = useRef<number | null>(null);
   const { addItem } = useCart();
   if (!product) return null;
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
   const selectedColor = product.colors?.find((color) => color.name === colorName) ?? product.colors?.[0];
   const photos = selectedColor?.photos ?? [];
   const activePhoto = photos[Math.min(photoIndex, Math.max(photos.length - 1, 0))];
+  const changePhoto = (step: number) => {
+    if (photos.length < 2) return;
+    setPhotoIndex((index) => (index + step + photos.length) % photos.length);
+  };
 
   return (
     <div>
@@ -122,12 +128,54 @@ function ProductPage() {
               </p>
             </div>
           ) : (
-            <ProductVisual
-              product={product}
-              photo={activePhoto}
-              primary
-              className="aspect-[3/4] w-full bg-muted"
-            />
+            <div
+              className="group relative overflow-hidden bg-muted"
+              onWheel={(event) => {
+                if (photos.length < 2 || Math.abs(event.deltaY) < 8) return;
+                const now = Date.now();
+                if (now - lastWheelTime.current < 450) return;
+                lastWheelTime.current = now;
+                changePhoto(event.deltaY > 0 ? 1 : -1);
+              }}
+              onTouchStart={(event) => { touchStartX.current = event.touches[0]?.clientX ?? null; }}
+              onTouchEnd={(event) => {
+                const end = event.changedTouches[0]?.clientX;
+                if (touchStartX.current === null || end === undefined) return;
+                const delta = touchStartX.current - end;
+                if (Math.abs(delta) > 45) changePhoto(delta > 0 ? 1 : -1);
+                touchStartX.current = null;
+              }}
+            >
+              <ProductVisual
+                product={product}
+                photo={activePhoto}
+                primary
+                className="aspect-[3/4] w-full bg-muted"
+              />
+              {photos.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Foto anterior"
+                    onClick={() => changePhoto(-1)}
+                    className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/65 text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Próxima foto"
+                    onClick={() => changePhoto(1)}
+                    className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black/65 text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--gold)]"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                  <span className="absolute bottom-4 right-4 rounded-full bg-black/65 px-3 py-1.5 text-xs text-white">
+                    {photoIndex + 1} / {photos.length}
+                  </span>
+                </>
+              )}
+            </div>
           )}
           {selectedColor && photos.length > 0 ? (
             <div className="mt-3 grid grid-cols-5 gap-2">
@@ -138,6 +186,7 @@ function ProductPage() {
                   aria-label={`Ver foto ${index + 1}: ${photo.alt}`}
                   aria-pressed={index === photoIndex}
                   onClick={() => setPhotoIndex(index)}
+                  onMouseEnter={() => setPhotoIndex(index)}
                   className={`aspect-[3/4] overflow-hidden border-2 transition-colors ${index === photoIndex ? "border-[color:var(--gold)]" : "border-transparent hover:border-border"}`}
                 >
                   <ProductVisual product={product} photo={photo} className="h-full w-full bg-muted" />
