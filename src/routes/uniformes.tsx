@@ -32,9 +32,9 @@ const uniformLines = [
     image: products.find((product) => product.slug === "polo-executiva-grafite")?.image,
   },
   {
-    title: "Térmica",
-    description: "Camadas estruturadas para equipes em ambientes frios, com foco em conforto, presença e mobilidade.",
-    image: products.find((product) => product.slug === "colete-alfaiataria-grafite")?.image,
+    title: "Alfaiataria",
+    description: "Peças de alfaiataria para equipes e atendimento, com cortes estruturados, conforto e apresentação refinada.",
+    image: products.find((product) => product.slug === "calca-alfaiataria-cintura-alta")?.image,
   },
   {
     title: "Operacional",
