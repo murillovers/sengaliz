@@ -6,19 +6,19 @@ const ROTATION_INTERVAL_MS = 6000;
 
 const banners = [
   {
-    image: "/images/campanha-black-friday.webp",
+    image: "/images/banner-black-friday-2026.webp",
     alt: "Capa Black Friday Sengaliz com vestido azul e condições promocionais",
     title: "Black Friday Sengaliz",
     to: "/festa",
   },
   {
-    image: "/images/campanha-semana-consumidor.webp",
+    image: "/images/banner-semana-consumidor-2026.webp",
     alt: "Capa Semana do Consumidor Sengaliz com fotografias de moda festa",
     title: "Semana do Consumidor",
     to: "/festa",
   },
   {
-    image: "/images/campanha-nova-colecao.webp",
+    image: "/images/banner-nova-colecao-2026.webp",
     alt: "Capa da nova coleção Sengaliz com polo e chamada de compra",
     title: "Nova coleção",
     to: "/uniformes",
@@ -77,7 +77,7 @@ export function HomeHeroCarousel() {
     <section
       aria-label="Capas e campanhas Sengaliz"
       aria-roledescription="carrossel"
-      className="group relative isolate bg-[#111111] text-white"
+      className="group relative isolate overflow-hidden bg-transparent text-white"
       onTouchStart={(event) => {
         touchStartX.current = event.touches[0]?.clientX ?? null;
       }}
@@ -121,7 +121,7 @@ export function HomeHeroCarousel() {
         }
       }}
     >
-      <div className="relative aspect-[1440/585] min-h-[215px] w-full overflow-hidden sm:min-h-[270px] md:min-h-0">
+      <div className="relative aspect-[2048/832] w-full overflow-hidden">
         {banners.map((banner, index) => (
           <Link
             key={banner.image}
@@ -134,7 +134,7 @@ export function HomeHeroCarousel() {
             <img
               src={banner.image}
               alt={banner.alt}
-              className="h-full w-full select-none object-contain md:object-cover"
+              className="block h-full w-full select-none object-contain"
               draggable={false}
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}
@@ -146,7 +146,7 @@ export function HomeHeroCarousel() {
           type="button"
           aria-label="Capa anterior"
           onClick={previous}
-          className="absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white shadow-md backdrop-blur-sm transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--gold)] sm:left-5"
+          className="absolute left-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white shadow-md backdrop-blur-sm transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--gold)] sm:left-5 sm:h-11 sm:w-11"
         >
           <ChevronLeft className="h-6 w-6" />
         </button>
@@ -154,13 +154,13 @@ export function HomeHeroCarousel() {
           type="button"
           aria-label="Próxima capa"
           onClick={next}
-          className="absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white shadow-md backdrop-blur-sm transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--gold)] sm:right-5"
+          className="absolute right-1 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/45 text-white shadow-md backdrop-blur-sm transition hover:bg-black/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--gold)] sm:right-5 sm:h-11 sm:w-11"
         >
           <ChevronRight className="h-6 w-6" />
         </button>
       </div>
 
-      <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/60 px-3 py-2 backdrop-blur-sm sm:bottom-5">
+      <div className="absolute bottom-1 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/55 px-2.5 py-1.5 backdrop-blur-sm sm:bottom-5 sm:px-3 sm:py-2">
         {banners.map((banner, index) => (
           <button
             key={banner.title}
