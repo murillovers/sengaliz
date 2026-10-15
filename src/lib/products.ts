@@ -77,5 +77,73 @@ export const products: Product[] = [
   { slug: "camiseta-operacional-algodao-pv", name: "Camiseta Operacional Algodão PV", brand: "Sengaliz", price: 189, category: "masculino", occasion: "Linha operacional e equipes", line: "Operacional", description: "Malha PV que equilibra conforto térmico com boa resposta a lavagens industriais frequentes. Gola careca reforçada com fita dupla e bainha inferior dupla, com espaço reservado no peito para logotipo.", image: `${rawCatalog}/Gemini_Generated_Image_lnxdhqlnxdhqlnxd%20(1).jfif`, hover: `${rawCatalog}/Gemini_Generated_Image_lnxdhqlnxdhqlnxd%20(1).jfif` },
 ];
 
+
+/** Paleta visual de cores para consulta; somente a fotografia original confirma a tonalidade cadastrada. */
+export const PRODUCT_COLOR_SWATCHES: Record<string, string> = {
+  "Preto": "#28272B",
+  "Azul-marinho": "#192D53",
+  "Bege": "#BEAA89",
+  "Off-white": "#F2EEE5",
+  "Marfim": "#F0E6D3",
+  "Nude": "#D9BBAA",
+  "Grafite": "#56575C",
+  "Bordô": "#72283A",
+  "Dourado": "#C7A45B",
+  "Champagne": "#D8C7A3",
+  "Pérola": "#EAE6E0",
+  "Terracota": "#BD523D",
+  "Branco": "#FFFFFF",
+  "Prata": "#B9BCC2",
+  "Azul-petróleo": "#27545C",
+};
+
+const originalColors: Record<string, string> = {
+  "camisa-feminina-crepe": "Marfim",
+  "conjunto-alfaiataria-nude": "Nude",
+  "colete-alfaiataria-grafite": "Grafite",
+  "vestido-dourado-lume": "Dourado",
+  "vestido-veludo-bordo": "Bordô",
+  "vestido-metalico": "Prata",
+  "camisa-seda-perola": "Pérola",
+  "colete-laco-seda-champagne": "Champagne",
+  "polo-executiva-grafite": "Grafite",
+  "polo-executiva-perola": "Pérola",
+  "camisa-executiva-tricoline": "Branco",
+  "polo-operacional-marinho": "Azul-marinho",
+  "calca-operacional-sarja": "Grafite",
+  "camiseta-operacional-algodao-pv": "Branco",
+};
+
+/** Todos os itens possuem cores selecionáveis; opções sem foto são sob consulta. */
+export function getProductColors(product: Product): ProductColor[] {
+  if (product.colors?.length) return product.colors;
+
+  const original = originalColors[product.slug] ?? "Preto";
+  const proposals = product.category === "festa"
+    ? ["Preto", "Azul-marinho", "Bordô", "Champagne"]
+    : product.line === "Operacional"
+      ? ["Preto", "Azul-marinho", "Grafite", "Branco"]
+      : ["Preto", "Azul-marinho", "Bege", "Off-white", "Grafite"];
+  const options = [original, ...proposals].filter((name, index, all) => all.indexOf(name) === index);
+
+  return options.map((name, index) => ({
+    name,
+    hex: PRODUCT_COLOR_SWATCHES[name] ?? "#888888",
+    photos: index === 0
+      ? [
+          {
+            src: product.image,
+            alt: `${product.name} — fotografia original (${name})`,
+            spritePosition: product.imagePosition,
+            spriteSize: product.imagePosition ? "600% 300%" : undefined,
+          },
+          ...(product.hover !== product.image
+            ? [{ src: product.hover, alt: `${product.name} — ângulo alternativo (${name})` }]
+            : []),
+        ]
+      : [],
+  }));
+}
+
 export const formatPrice = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 0 });

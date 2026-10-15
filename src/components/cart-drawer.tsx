@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "@/components/cart-context";
+import { CouponField } from "@/components/coupon-field";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/products";
 import { getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
+import { getCouponPrice } from "@/lib/coupons";
 
 const WHATSAPP_NUMBER = "5554933803839";
 
 export function CartDrawer() {
-  const { items, total, isOpen, closeCart, updateQuantity, removeItem } = useCart();
+  const { items, total, coupon, couponDiscount, discountedTotal, pixTotal, isOpen, closeCart, updateQuantity, removeItem } = useCart();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -34,8 +36,10 @@ export function CartDrawer() {
       "",
       ...lines,
       "",
-      `Total no cartão: ${formatPrice(total)}`,
-      `Total no Pix (${PIX_DISCOUNT_PERCENT}% de desconto): ${formatPrice(getPixPrice(total))}`,
+      `Subtotal: ${formatPrice(total)}`,
+      ...(coupon ? [`Cupom ${coupon.code} (${coupon.discountPercent}%): -${formatPrice(couponDiscount)}`] : []),
+      `Total no cartão após cupom: ${formatPrice(discountedTotal)}`,
+      `Total no Pix (mais ${PIX_DISCOUNT_PERCENT}% de desconto): ${formatPrice(pixTotal)}`,
       "",
       "Podem me orientar sobre pagamento e entrega?",
     ].join("\n");
@@ -70,18 +74,7 @@ export function CartDrawer() {
                 const itemTotal = item.price * item.quantity;
                 return (
                   <article key={`${item.slug}-${item.size}-${item.color ?? ""}`} className="grid grid-cols-[80px_1fr] gap-4 border-b border-border py-5">
-                    {item.photoPending ? (
-                      <div
-                        role="img"
-                        aria-label={`Cor ${item.color ?? "sem fotografia"}`}
-                        className="flex aspect-[3/4] w-20 items-center justify-center bg-muted"
-                      >
-                        <span
-                          className="h-10 w-10 rounded-full border-2 border-background"
-                          style={{ backgroundColor: item.imageColor }}
-                        />
-                      </div>
-                    ) : item.imagePosition ? (
+                    {item.imagePosition ? (
                       <div
                         role="img"
                         aria-label={item.name}
@@ -100,6 +93,7 @@ export function CartDrawer() {
                         <div>
                           <h3 className="text-sm font-semibold">{item.name}</h3>
                           {item.color && <p className="mt-1 text-xs text-muted-foreground">Cor: {item.color}</p>}
+                          {item.photoPending && <p className="mt-1 text-[11px] text-muted-foreground">Foto ilustrativa; cor sob consulta.</p>}
                           <p className="mt-1 text-xs text-muted-foreground">Tamanho {item.size}</p>
                         </div>
                         <Button variant="ghost" size="icon" className="h-9 w-9 flex-none" onClick={() => removeItem(item.slug, item.size, item.color)} aria-label={`Remover ${item.name}`}>
@@ -118,7 +112,9 @@ export function CartDrawer() {
                         </div>
                         <div className="text-right">
                           <p className="text-xs text-muted-foreground">De <span className="line-through">{formatPrice(itemTotal)}</span></p>
-                          <p className="mt-0.5 text-sm font-semibold text-[color:var(--gold)]">Por {formatPrice(getPixPrice(itemTotal))} no Pix</p>
+                          <p className="mt-0.5 text-sm font-semibold text-[color:var(--gold)]">
+                            Por {formatPrice(getPixPrice(getCouponPrice(itemTotal, coupon)))} no Pix
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -127,18 +123,35 @@ export function CartDrawer() {
               })}
             </div>
             <div className="border-t border-border bg-surface p-5 sm:p-7">
-              <div className="flex items-end justify-between gap-5">
+              <CouponField compact />
+              <div className="mt-5 flex flex-col gap-2 border-t border-border pt-4 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Subtotal</span>
+                  <span>{formatPrice(total)}</span>
+                </div>
+                {coupon && (
+                  <div className="flex items-center justify-between text-[color:var(--gold-deep)]">
+                    <span>Cupom {coupon.code} ({coupon.discountPercent}%)</span>
+                    <span>-{formatPrice(couponDiscount)}</span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between">
+                  <span>Total no cartão</span>
+                  <strong>{formatPrice(discountedTotal)}</strong>
+                </div>
+              </div>
+              <div className="mt-4 flex items-end justify-between gap-5">
                 <div>
                   <span className="text-xs font-medium uppercase tracking-[0.16em]">Total</span>
                   <p className="mt-1 text-xs text-muted-foreground">De <span className="line-through">{formatPrice(total)}</span></p>
                 </div>
                 <div className="text-right">
-                  <strong className="font-serif text-2xl text-[color:var(--gold)]">Por {formatPrice(getPixPrice(total))}</strong>
+                  <strong className="font-serif text-2xl text-[color:var(--gold)]">Por {formatPrice(pixTotal)}</strong>
                   <p className="text-xs text-muted-foreground">no Pix • {PIX_DISCOUNT_PERCENT}% off</p>
                 </div>
               </div>
               <Button size="lg" className="mt-5 w-full" onClick={checkout}>Finalizar pelo WhatsApp</Button>
-              <p className="mt-3 text-center text-xs text-muted-foreground">Pagamento e entrega serão combinados no atendimento.</p>
+              <p className="mt-3 text-center text-xs text-muted-foreground">Cupom, cores, pagamento e entrega serão confirmados no atendimento.</p>
             </div>
           </>
         )}

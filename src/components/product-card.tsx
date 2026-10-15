@@ -1,8 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import { formatPrice, type Product } from "@/lib/products";
+import { formatPrice, getProductColors, type Product } from "@/lib/products";
+import { getCouponPrice } from "@/lib/coupons";
+import { useCart } from "@/components/cart-context";
 import { getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 
 export function ProductCard({ product }: { product: Product }) {
+  const { coupon } = useCart();
+  const colors = getProductColors(product);
+  const priceAfterCoupon = getCouponPrice(product.price, coupon);
   return (
     <Link
       to="/produto/$slug"
@@ -44,6 +49,18 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="flex min-h-36 flex-col gap-2 p-4">
         <h3 className="text-base font-semibold leading-tight">{product.name}</h3>
+        <div className="flex items-center gap-1.5" aria-label={`Opções de cor: ${colors.map((color) => color.name).join(", ")}`}>
+          {colors.slice(0, 5).map((color) => (
+            <span
+              key={color.name}
+              title={color.name}
+              aria-hidden="true"
+              className="h-4 w-4 rounded-full border border-black/20 ring-1 ring-border"
+              style={{ backgroundColor: color.hex }}
+            />
+          ))}
+          <span className="ml-1 text-[10px] text-muted-foreground">{colors.length} cores · consulte disponibilidade</span>
+        </div>
         {product.priceOnRequest ? (
           <p className="mt-auto text-sm font-semibold text-foreground">Sob consulta</p>
         ) : (
@@ -52,9 +69,10 @@ export function ProductCard({ product }: { product: Product }) {
               De <span className="line-through">{formatPrice(product.price)}</span>
             </p>
             <p className="mt-0.5 text-base font-semibold text-[color:var(--gold)]">
-              Por {formatPrice(getPixPrice(product.price))} <span className="text-xs font-medium">no Pix</span>
+              Por {formatPrice(getPixPrice(priceAfterCoupon))} <span className="text-xs font-medium">no Pix</span>
             </p>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{PIX_DISCOUNT_PERCENT}% de desconto</p>
+            {coupon && <p className="mt-1 text-[10px] font-medium text-[color:var(--gold-deep)]">Cupom {coupon.code}: -{coupon.discountPercent}%</p>}
+            <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">{PIX_DISCOUNT_PERCENT}% no Pix</p>
           </div>
         )}
       </div>

@@ -1,6 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Heart, ShieldCheck, Truck } from "lucide-react";
-import { products, formatPrice, type Product, type ProductPhoto } from "@/lib/products";
+import { products, formatPrice, getProductColors, type Product, type ProductPhoto } from "@/lib/products";
+import { getCouponPrice } from "@/lib/coupons";
+import { CouponField } from "@/components/coupon-field";
 import { getInstallmentPrice, getPixPrice, PIX_DISCOUNT_PERCENT } from "@/lib/pricing";
 import { ProductCard } from "@/components/product-card";
 import { SizeGuideModal } from "@/components/size-guide-modal";
@@ -100,10 +102,12 @@ function ProductPage() {
   const [photoIndex, setPhotoIndex] = useState(0);
   const lastWheelTime = useRef(0);
   const touchStartX = useRef<number | null>(null);
-  const { addItem } = useCart();
+  const { addItem, coupon } = useCart();
   if (!product) return null;
+  const colors = getProductColors(product);
+  const priceAfterCoupon = getCouponPrice(product.price, coupon);
   const related = products.filter((p) => p.slug !== product.slug).slice(0, 4);
-  const selectedColor = product.colors?.find((color) => color.name === colorName) ?? product.colors?.[0];
+  const selectedColor = colors.find((color) => color.name === colorName) ?? colors[0];
   const photos = selectedColor?.photos ?? [];
   const activePhoto = photos[Math.min(photoIndex, Math.max(photos.length - 1, 0))];
   const changePhoto = (step: number) => {
@@ -116,16 +120,23 @@ function ProductPage() {
       <section className="container-page grid gap-12 py-12 md:grid-cols-2 md:py-16">
         <div>
           {selectedColor && photos.length === 0 ? (
-            <div className="flex aspect-[3/4] flex-col items-center justify-center gap-4 bg-muted px-8 text-center">
-              <span
-                className="h-24 w-24 rounded-full border-4 border-background shadow-card"
-                style={{ backgroundColor: selectedColor.hex }}
-                aria-hidden="true"
+            <div>
+              <ProductVisual
+                product={product}
+                primary
+                className="aspect-[3/4] w-full bg-muted"
               />
-              <p className="font-serif text-2xl">{selectedColor.name}</p>
-              <p className="max-w-xs text-sm text-muted-foreground">
-                A fotografia desta cor ainda não está cadastrada. Confirme a tonalidade e a disponibilidade com a Sengaliz.
-              </p>
+              <div className="mt-3 flex items-center gap-3 border border-border bg-surface p-3">
+                <span
+                  className="h-8 w-8 flex-none rounded-full border border-black/20"
+                  style={{ backgroundColor: selectedColor.hex }}
+                  aria-hidden="true"
+                />
+                <p className="text-xs leading-relaxed text-muted-foreground">
+                  Imagem ilustrativa da peça. Ainda não há foto na cor {selectedColor.name}.
+                  Confirme tonalidade e disponibilidade com a Sengaliz.
+                </p>
+              </div>
             </div>
           ) : (
             <div
@@ -215,15 +226,22 @@ function ProductPage() {
               </p>
               <p className="mt-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
                 <span className="text-sm text-muted-foreground">Por</span>
-                <span className="font-serif text-3xl text-[color:var(--gold)]">{formatPrice(getPixPrice(product.price))}</span>
+                <span className="font-serif text-3xl text-[color:var(--gold)]">{formatPrice(getPixPrice(priceAfterCoupon))}</span>
                 <span className="text-sm font-medium">no Pix</span>
               </p>
               <p className="mt-1 text-xs font-medium text-[color:var(--gold)]">{PIX_DISCOUNT_PERCENT}% de desconto no pagamento via Pix</p>
+              {coupon && (
+                <p className="mt-2 text-xs font-medium text-[color:var(--gold-deep)]">
+                  Cupom {coupon.code}: {coupon.discountPercent}% aplicado antes do Pix e do parcelamento.
+                </p>
+              )}
               <p className="mt-2 text-xs text-muted-foreground">
-                Ou em até 6x de {formatPrice(getInstallmentPrice(product.price))} sem juros no cartão
+                Ou em até 6x de {formatPrice(getInstallmentPrice(priceAfterCoupon))} sem juros no cartão
               </p>
             </div>
           )}
+
+          {!product.priceOnRequest && <div className="mt-6"><CouponField /></div>}
 
           {product.priceOnRequest ? (
             <div className="mt-8">
@@ -242,7 +260,7 @@ function ProductPage() {
                     Cor: <span className="text-foreground">{selectedColor.name}</span>
                   </legend>
                   <div className="mt-3 flex flex-wrap gap-3">
-                    {product.colors?.map((color) => (
+                    {colors.map((color) => (
                       <button
                         key={color.name}
                         type="button"
@@ -259,7 +277,7 @@ function ProductPage() {
                       </button>
                     ))}
                   </div>
-                  <p className="mt-2 text-xs text-muted-foreground">As fotos são exibidas somente para as cores com imagens cadastradas. Disponibilidade a confirmar.</p>
+                  <p className="mt-2 text-xs text-muted-foreground">As cores sem fotos são opções sob consulta. A foto da peça permanece ilustrativa até termos imagens da tonalidade.</p>
                 </fieldset>
               )}
               <div className="mt-8">
